@@ -1,7 +1,16 @@
 # AgriHydro
 Agriculture and Hydrological assessment model.
-AgriHydro consists of 4 components and each of them will be introduced below.
-
+AgriHydro consists of 4 components and each of them will be introduced below, which each of them can be used independently.
+To run AgriHydro, please follow the steps below.
+1. Make sure following folders are prepared
+  (1) AgriHydroPYFile		          => python files
+	(2) AgriHydroCommonWthData	    => weather data folder
+	(3) AgriHydroCommonSDInflowData	=> stream flow data folder
+	(4) AgriHydroBlank		          => results and other files
+2. Prepare weather data using MultiWG and name the file as "<GCM>_<RCP>_<start year(EX 2021)>_<station ID>.csv". Put those weather files in AgriHydroCommonWthData folder.
+3. Prepare stream flow using GWLF and name the file as "<GCM>_<RCP>_<start year(EX 2021)>_<#Run (EX 1)>_<year in the Run (EX y11)>.csv". Put those stream flow files in AgriHydroCommonSDInflowData folder.
+4. Exercute AgriHydro_RUN.py
+  
 ## Multi-site Stochastic Weather Generator
 
 The instruction, sample data, and the program can be downloaded at https://drive.google.com/drive/folders/1YCsQCfLnDI2d7cy8DR51DyG--BJSmEf0?usp=sharing
