@@ -45,4 +45,4 @@ SDmodel = pysd.load(filename)
 More control options can be found at https://pysd-cookbook.readthedocs.io/en/latest/.
 
 ## AquaCrop
-The input files for our study crops, such as Rice and Soybean, are provided For more detail about AquaCrop, please find it at http://www.fao.org/aquacrop.
+The input files for our study crops, such as Rice and Soybean, are provided. For more detail about AquaCrop, please find it at http://www.fao.org/aquacrop.
