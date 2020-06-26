@@ -1,0 +1,2024 @@
+{UTF-8}
+Sum Allocation ShiMenReservoir To HouChiWeir=
+	Allocation NCSIST+Allocation TaoYuan AgriChannel AgriWater+Allocation TaoYuan CPC Refinery\
+		+Allocation TaoYuanDaHanRiver AgriWater
+	+Sum WPP ShiMenReservoir To HouChiWeir
+	~	m3
+	~		|
+
+Operation Rule Record Industry=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , 1
+	 , IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , 0.9 , 0.8 ))
+	~	
+	~		|
+
+Operation Rule Record Agriculture=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , 1\
+		, IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , 0.75 , 0.5 ))
+	~	
+	~		|
+
+Allocation BanXin WPP=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit ,Water Right BanXin WPP\
+		, IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , Water Right BanXin WPP*0.9,Water Right BanXin WPP*0.8 ))
+	~	m3
+	~		|
+
+Allocation DaNan WPP1=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , Water Right DaNan WPP1
+	 , IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , Water Right DaNan WPP1*0.9 , Water Right DaNan WPP1*0.8 ))
+	~	m3
+	~	source from YuanShan Weir;
+		water right 155520(m^3 per day)is the same for each Ten-days;
+	|
+
+Allocation DaNan WPP2=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , Water Right DaNan WPP2
+	 , IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , Water Right DaNan WPP2*0.9
+	 , Water Right DaNan WPP2*0.8 ))
+	~	m3
+	~	source from TaoYuan AgriChannel
+	|
+
+Allocation LongTan WPP=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , Water Right ShiMenLongTan WPP\
+		*0.613, IF THEN ELSE
+	( ShiMen Reservoir Depth
+	>=ShiMenReservoir Operation Rule Lower Severe Limit , Water Right ShiMenLongTan WPP*\
+		0.613*0.9 , Water Right ShiMenLongTan WPP*0.613*0.8 ) )
+	~	m3
+	~	water right 146880(m^3 per day)is the sum of LongTan WPP & ShiMen WPP, the same for \
+		each Ten-days;
+		"0.613" is the % responsibility of LomgTan WPP, calculated from their max \
+		capacity.
+	|
+
+Allocation NCSIST=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , 6048\
+		, IF THEN ELSE( ShiMen Reservoir Depth
+	>=ShiMenReservoir Operation Rule Lower Severe Limit, 6048*0.9 , 6048*0.8 )
+	 )
+	~	m3
+	~	water right 6048(m^3 per day), the same for each Ten-days;
+		0.07 CMSD, classified as Domestic.
+	|
+
+Allocation PingZhen WPP1=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , Water Right PingZhen WPP1
+	 , IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , Water Right PingZhen WPP1*0.9 , Water Right PingZhen WPP1*0.8 ))
+	~	m3
+	~	source from ShiMen AgriChannel
+	|
+
+Allocation PingZhen WPP2=
+	IF THEN ELSE(ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit, Water Right PingZhen WPP2\
+		, IF THEN ELSE( ShiMen Reservoir Depth
+	>=ShiMenReservoir Operation Rule Lower Severe Limit, Water Right PingZhen WPP2*0.9 ,\
+		 Water Right PingZhen WPP2*0.8 ))
+	~	m3
+	~	source from HouChi Weir;
+		water right 172800(m^3 per day), the same for each Ten-days
+	|
+
+Allocation Proportion of BanXinWPP=
+	Allocation BanXin WPP/Total WPP Allocation
+	~	m3/m3
+	~		|
+
+Allocation Proportion of DaNanWPP1=
+	Allocation DaNan WPP1/Total WPP Allocation
+	~	m3/m3
+	~		|
+
+Allocation Proportion of DaNanWPP2=
+	Allocation DaNan WPP2/Total WPP Allocation
+	~	m3/m3
+	~		|
+
+Allocation Proportion of LongTanWPP=
+	Allocation LongTan WPP/Total WPP Allocation
+	~	m3/m3
+	~		|
+
+Allocation Proportion of PingZhenWPP1=
+	Allocation PingZhen WPP1/Total WPP Allocation
+	~	m3/m3
+	~		|
+
+Allocation Proportion of PingZhenWPP2=
+	Allocation PingZhen WPP2/Total WPP Allocation
+	~	m3/m3
+	~		|
+
+Allocation Proportion of ShiMenWPP=
+	Allocation ShiMen WPP/Total WPP Allocation
+	~	m3/m3
+	~		|
+
+Allocation ShiMen AgriChannel AgriWater=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , Water Right ShiMen AgriChannel AgriWater\
+		, IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , Water Right ShiMen AgriChannel AgriWater*0.75 , Water Right ShiMen AgriChannel AgriWater\
+		*0.5 ))
+	~	m3
+	~		|
+
+Allocation ShiMen WPP=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , Water Right ShiMenLongTan WPP\
+		*0.387, IF THEN ELSE( ShiMen Reservoir Depth
+	>=ShiMenReservoir Operation Rule Lower Severe Limit , Water Right ShiMenLongTan WPP*\
+		0.387*0.9 , Water Right ShiMenLongTan WPP*0.387*0.8 ))
+	~	m3
+	~	water right 146880(m^3 per day)is the sum of LongTan WPP & ShiMen WPP, the same for \
+		each Ten-days;
+		"0.387" is the % responsibility of ShiMen WPP, calculated from their max \
+		capacity.
+	|
+
+Allocation TaoYuan AgriChannel AgriWater=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , Water Right TaoYuan AgriChannel AgriWater\
+		, IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , Water Right TaoYuan AgriChannel AgriWater*0.75 , Water Right TaoYuan AgriChannel AgriWater\
+		*0.5 ))
+	~	m3
+	~		|
+
+Allocation TaoYuan CPC Refinery=
+	IF THEN ELSE(ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit, Water Right TaoYuan CPC Refinery
+	 , IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , Water Right TaoYuan CPC Refinery*0.9 , Water Right TaoYuan CPC Refinery*0.8 ))
+	~	m3
+	~	classified as Domestic.
+	|
+
+Allocation TaoYuanDaHanRiver AgriWater=
+	IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Limit , Water Right TaoYuanDaHanRiver AgriWater\
+		, IF THEN ELSE( ShiMen Reservoir Depth>=ShiMenReservoir Operation Rule Lower Severe Limit\
+		 , Water Right TaoYuanDaHanRiver AgriWater*0.75 , Water Right TaoYuanDaHanRiver AgriWater\
+		*0.5 ))
+	~	m3
+	~		|
+
+BanXin Water Demand=
+	Transfer From BanXinWPP To BanXinWaterDemand*(1-Tap Water Loss Rate)
+	~	m3
+	~		|
+
+BanXin WPP=
+	(Taipei Water Department Source+Transfer From SanXiaWeir To BanXinWPP+Transfer From YuanShanWeir To BanXinWPP\
+		+Transfer From ZhongZhuangAdjustmentReservoir To BanXinWPP)-(Transfer From BanXinWPP To NorthTaoYuanWaterDemand\
+		+Transfer From BanXinWPP To BanXinWaterDemand)
+	~	m3
+	~	outcome should be zero, all in and out.
+	|
+
+Channel Transfer Loss Rate=
+	0
+	~	m3/m3
+	~	This is "no loss rate" version.
+	|
+
+DaNan WPP=
+	Tranfer From YuanShanWeir To DaNanWPP+Transfer From TaoYuanAgriChannel To DaNanWPP+Transfer From ZhongZhuangAdjustmentReservoir To DaNanWPP\
+		-(Transfer From DaNanWPP To NorthTaoYuanWaterDemand)
+	~	m3
+	~	outcome should be zero, all in and out.
+	|
+
+Date=
+	123
+	~	Day
+	~		|
+
+Domestic Water Demand=
+	Public Water Demand*"Domestic-Industry Proportion"
+	~	m3
+	~		|
+
+"Domestic-Industry Proportion"=
+	TargetYear DomesticWaterDemand/(TargetYear DomesticWaterDemand+TargetYear IndustryWaterDemand\
+		)
+	~	m3/m3
+	~	Set by model context
+	|
+
+EcoBaseFlow=
+	MIN(YuanShan Weir Ecological Base Stream Flow, Transfer From ZhongZhuangWeir To YuanShanWeir\
+		 )
+	~	m3
+	~	198720 (m^3/day) is DaHan downstream EcoBaseFlow.
+	|
+
+Final Allocation ShiMenReservoir To HouChiWeir=
+	MIN((ShiMen Reservoir-Support For DaHan River Ecological Base Stream Flow)*Ratio ShiMenReservoir To HouChiWeir\
+		 , Allocation NCSIST+Allocation TaoYuan CPC Refinery+Sum AgriWater ShiMenReservoir To HouChiWeir
+	+Sum WPP ShiMenReservoir To HouChiWeir )
+	~	m3
+	~	It's final, which has considered the Reservoir volumn.
+	|
+
+Final Allocation ShiMenReservoir To ShiMenAgriChannel=
+	MIN( (ShiMen Reservoir-Support For DaHan River Ecological Base Stream Flow)*Ratio ShiMenReservoir To ShiMenAgriChannel\
+		 , Allocation NCSIST+Sum AgriWater ShiMenReservoir To ShiMenAgriChannel
+	+Sum WPP ShiMenReservoir To ShiMenAgriChannel )
+	~	m3
+	~	It's final, which has considered the Reservoir volumn.
+	|
+
+HouChi Weir=
+	Transfer From ShiMenReservoir To HouChiWeir+ShiMen Reservoir Overflow+Support EcoBaseFlow\
+		-Transfer From HouChiWeir To TaoYuanAgriChannel
+	-Transfer From HouChiWeir To ZhongZhuangWeir
+	-(PingZhen WPP2/(1-WPP Transfer Loss Rate))
+	~	m3
+	~	Should be zero(all in and out)
+	|
+
+HsinChu Water Demand=
+	TaoChu TwoWay Support 1*(1-Tap Water Loss Rate)-TaoChu TwoWay Support 2
+	~	m3
+	~		|
+
+Industry Water Demand=
+	Public Water Demand*(1-"Domestic-Industry Proportion")
+	~	m3
+	~		|
+
+Irrigation Tranfer Loss Amount=
+	Transfer From ZhongZhuangWeir To TaoYuanDaHanRiver AgriWater Demand*TaoYuan AgriChannel Irrigation Transfer Loss Rate
+	~	m3
+	~		|
+
+LongTan WPP=
+	Transfer From ShiMenReservoir To ShiMenAgriChannel*Ratio WPP ShiMenReservoir To ShiMenAgriChannel\
+		*Ratio LongTanWPP At ShiMenAgriChannel*(1-WPP Transfer Loss Rate)
+	~	m3
+	~	WPP transfer loss is considered in the Demand section.
+	|
+
+North TaoYuan Water Demand=
+	(Transfer From BanXinWPP To NorthTaoYuanWaterDemand+Transfer From DaNanWPP To NorthTaoYuanWaterDemand\
+		+TaoYuan Water Supply Network 2)*(1-Tap Water Loss Rate)-TaoYuan Water Supply Network 1
+	~	m3
+	~		|
+
+PingZhen WPP1=
+	Transfer From ShiMenReservoir To ShiMenAgriChannel*Ratio WPP ShiMenReservoir To ShiMenAgriChannel\
+		*Ratio PingZhenWPP1 At ShiMenAgriChannel*(1-WPP Transfer Loss Rate)
+	~	m3
+	~	source from ShiMen AgriChannel;
+		WPP transfer loss is considered in the Demand section.
+	|
+
+PingZhen WPP2=
+	Transfer From ShiMenReservoir To HouChiWeir*Ratio WPP ShiMenReservoir To HouChiWeir*\
+		Ratio PingZhenWPP2 At HouChiWeir*(1-WPP Transfer Loss Rate)
+	~	m3
+	~	source from HouChi Weir;
+		WPP transfer loss is considered in the Demand section.
+	|
+
+Proportion Checking Variable=
+	Total Allocation Proportion At HouChiWeir+Total Allocation Proportion At ShiMenAgriChannel
+	~	m3/m3
+	~	the sum should be 1.
+	|
+
+Public Water Demand=
+	North TaoYuan Water Demand+South TaoYuan Water Demand
+	~	m3
+	~		|
+
+Ratio AgriWater HouChiWeir To TaoYuanAgriChannel=
+	Sum AgriWater HouChiWeir To TaoYuanAgriChannel/Sum Allocation HouChiWeir To TaoYuanAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio AgriWater HouChiWeir To ZhongZhuangWeir=
+	Sum AgriWater HouChiWeir To ZhongZhuangWeir/Sum Allocation HouChiWeir To ZhongZhuangWeir
+	~	m3/m3
+	~		|
+
+Ratio AgriWater ShiMenReservoir To HouChiWeir=
+	Sum AgriWater ShiMenReservoir To HouChiWeir/Sum Allocation ShiMenReservoir To HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio AgriWater ShiMenReservoir To HouChiWeir In DaHanRiver=
+	Allocation TaoYuanDaHanRiver AgriWater/Sum Allocation ShiMenReservoir To HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio AgriWater ShiMenReservoir To HouChiWeir In TaoYuanAgriChannel=
+	Allocation TaoYuan AgriChannel AgriWater/Sum Allocation ShiMenReservoir To HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio AgriWater ShiMenReservoir To ShiMenAgriChannel=
+	Sum AgriWater ShiMenReservoir To ShiMenAgriChannel/Sum Allocation ShiMenReservoir To ShiMenAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio BanXinWPP Allocation At YuanShanWeir=
+	Allocation BanXin WPP/Total WPP Allocation At YuanShanWeir
+	~	m3/m3
+	~		|
+
+Ratio BanXinWPP At HouChiWeir=
+	Allocation BanXin WPP/Total WPP Allocation At HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio DaNanWPP1 Allocation At YuanShanWei=
+	Allocation DaNan WPP1/Total WPP Allocation At YuanShanWeir
+	~	m3/m3
+	~		|
+
+Ratio DaNanWPP1 At HouChiWeir=
+	Allocation DaNan WPP1/Total WPP Allocation At HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio DaNanWPP2 At HouChiWeir=
+	Allocation DaNan WPP2/Total WPP Allocation At HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio LongTanWPP At ShiMenAgriChannel=
+	Allocation LongTan WPP/Total WPP Allocation At ShiMenAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio NCSIST At HouChiWeir=
+	Allocation NCSIST/Sum Allocation ShiMenReservoir To HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio NCSIST At ShiMenAgriChannel=
+	Allocation NCSIST/Sum Allocation ShiMenReservoir To ShiMenAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio NCSIST At TaoYuanAgriChannel=
+	Allocation NCSIST/Sum Allocation HouChiWeir To TaoYuanAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio PingZhenWPP1 At ShiMenAgriChannel=
+	Allocation PingZhen WPP1/Total WPP Allocation At ShiMenAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio PingZhenWPP2 At HouChiWeir=
+	Allocation PingZhen WPP2/Total WPP Allocation At HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio ShiMenReservoir To HouChiWeir=
+	Sum Allocation ShiMenReservoir To HouChiWeir/Sum Allcation From ShiMenReservoir
+	~	m3/m3
+	~		|
+
+Ratio ShiMenReservoir To ShiMenAgriChannel=
+	Sum Allocation ShiMenReservoir To ShiMenAgriChannel/Sum Allcation From ShiMenReservoir
+	~	m3/m3
+	~		|
+
+Ratio ShiMenWPP At ShiMenAgriChannel=
+	Allocation ShiMen WPP/Total WPP Allocation At ShiMenAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio TaoYuan CPC Refinery At HouChiWeir=
+	Allocation TaoYuan CPC Refinery/Sum Allocation ShiMenReservoir To HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio TaoYuan CPC Refinery At TaoYuanAgriChannel=
+	Allocation TaoYuan CPC Refinery/Sum Allocation HouChiWeir To TaoYuanAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio WPP HouChiWeir To TaoYuanAgriChannel=
+	Sum WPP HouChiWeir To TaoYuanAgriChannel/Sum Allocation HouChiWeir To TaoYuanAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio WPP HouChiWeir To ZhongZhuangWeir=
+	Sum WPP HouChiWeir To ZhongZhuangWeir/Sum Allocation HouChiWeir To ZhongZhuangWeir
+	~	m3/m3
+	~		|
+
+Ratio WPP ShiMenReservoir To HouChiWeir=
+	Sum WPP ShiMenReservoir To HouChiWeir/Sum Allocation ShiMenReservoir To HouChiWeir
+	~	m3/m3
+	~		|
+
+Ratio WPP ShiMenReservoir To ShiMenAgriChannel=
+	Sum WPP ShiMenReservoir To ShiMenAgriChannel/Sum Allocation ShiMenReservoir To ShiMenAgriChannel
+	~	m3/m3
+	~		|
+
+Ratio ZhongZhuangAdjustmentReservoir take=
+	0
+	~	m3/m3
+	~	this ratio means how much amount ZhongZhuang Adgustment Reservoir share the YuanShan \
+		Weir's flow.
+		Here assume zero to ignore this facility.
+	|
+
+SanXia River Ecological Base Stream Flow=
+	43459.2
+	~	m3
+	~	0.503cms, equals 43459.2 m^3 per day
+	|
+
+SanXia River Inflow=
+	450000
+	~	m3
+	~	use 450000 to test
+	|
+
+SanXia Weir=
+	SanXia River Inflow-SanXia Weir Outflow-Transfer From SanXiaWeir To BanXinWPP-SanXiaWeir Transfer Loss Amount
+	~	m3
+	~	Should be zero(all in and out)
+	|
+
+SanXia Weir Outflow=
+	IF THEN ELSE(SanXia River Inflow<=SanXia River Ecological Base Stream Flow, SanXia River Inflow\
+		 , IF THEN ELSE
+	( Transfer From SanXiaWeir To BanXinWPP=(530000*(1-WPP Transfer Loss Rate)) , SanXia River Inflow\
+		-(Transfer From SanXiaWeir To BanXinWPP
+	/(1-WPP Transfer Loss Rate)) , SanXia River Ecological Base Stream Flow ))
+	~	m3
+	~		|
+
+SanXiaWeir Transfer Loss Amount=
+	Transfer From SanXiaWeir To BanXinWPP/(1-WPP Transfer Loss Rate)*WPP Transfer Loss Rate
+	~	m3
+	~		|
+
+ShiMen AgriChannel=
+	Transfer From ShiMenReservoir To ShiMenAgriChannel-LongTan WPP-PingZhen WPP1-ShiMen AgriChannel Transfer Loss Amount\
+		-ShiMen WPP
+	-Transfer From ShiMenAgriChannel To NCSIST-Transfer From ShiMenAgriChannel To ShiMenAgriWaterDemand
+	~	m3
+	~	Should be zero(all in and out)
+	|
+
+ShiMen AgriChannel AgriWater Actual Consumption=
+	0
+	~	m3
+	~	need to input data file;
+		asume zero for test.
+	|
+
+ShiMen AgriChannel AgriWater Demand=
+	Transfer From ShiMenAgriChannel To ShiMenAgriWaterDemand-ShiMen Irrigation Area Outflow\
+		-ShiMen AgriChannel Irrigation Transfer Loss Amount
+	~	m3
+	~		|
+
+ShiMen AgriChannel Irrigation Transfer Loss Amount=
+	Transfer From ShiMenAgriChannel To ShiMenAgriWaterDemand*ShiMen AgriChannel Irrigation Transfer Loss Rate
+	~	m3
+	~		|
+
+ShiMen AgriChannel Irrigation Transfer Loss Rate=
+	0
+	~	m3/m3
+	~	This is "no loss rate" version.
+	|
+
+ShiMen AgriChannel Transfer Loss Amount=
+	Transfer From ShiMenReservoir To ShiMenAgriChannel*Ratio WPP ShiMenReservoir To ShiMenAgriChannel\
+		*WPP Transfer Loss Rate+Transfer From ShiMenReservoir To ShiMenAgriChannel*(Ratio AgriWater ShiMenReservoir To ShiMenAgriChannel
+	+Ratio NCSIST At ShiMenAgriChannel)
+	*Channel Transfer Loss Rate
+	~	m3
+	~		|
+
+ShiMen Irrigation Area Outflow=
+	Transfer From ShiMenAgriChannel To ShiMenAgriWaterDemand-ShiMen AgriChannel Irrigation Transfer Loss Amount\
+		-ShiMen AgriChannel AgriWater Actual Consumption
+	~	m3
+	~		|
+
+ShiMen Reservoir= INTEG (
+	ShiMen Reservoir Inflow-ShiMen Reservoir Evaporation-ShiMen Reservoir Overflow-Support EcoBaseFlow\
+		-Transfer From ShiMenReservoir To HouChiWeir-Transfer From ShiMenReservoir To ShiMenAgriChannel\
+		,
+		1.06071e+008)
+	~	m3
+	~	Should adjust corespond Initial depth value.
+		Volume constraint is considered in the Variable "ShiMen Reservoir Outflow".
+	|
+
+ShiMen Reservoir Area = WITH LOOKUP (
+	ShiMen Reservoir,
+		([(0,0)-(2.02278e+008,9e+006)],(0,822667),(896296,972000),(1.89843e+006,1.03257e+006\
+		),(3.00141e+006,1.17492e+006),(4.2111e+006,1.24479e+006),(5.49883e+006,1.33117e+006\
+		),(6.85434e+006,1.37999e+006),(8.27291e+006,1.45751e+006),(9.77081e+006,1.53867e+006\
+		),(1.13411e+007,1.60218e+006),(1.29775e+007,1.67079e+006),(1.46904e+007,1.75543e+006\
+		),(1.64853e+007,1.83452e+006),(1.83768e+007,1.94916e+006),(2.04074e+007,2.11318e+006\
+		),(2.25632e+007,2.19873e+006),(2.47986e+007,2.27217e+006),(2.71057e+007,2.34227e+006\
+		),(2.9498e+007,2.44276e+006),(3.19865e+007,2.5345e+006),(3.45703e+007,2.63342e+006)\
+		,(3.72513e+007,2.72885e+006),(4.00261e+007,2.82085e+006),(4.29298e+007,2.98752e+006\
+		),(4.59992e+007,3.15203e+006),(4.92558e+007,3.36226e+006),(5.2845e+007,3.82106e+006\
+		),(5.68249e+007,4.1408e+006),(6.10739e+007,4.35817e+006),(6.5513e+007,4.52044e+006)\
+		,(7.01011e+007,4.65611e+006),(7.4826e+007,4.79401e+006),(7.96996e+007,4.95359e+006)\
+		,(8.47447e+007,5.1372e+006),(8.99704e+007,5.31475e+006),(9.53755e+007,5.49595e+006)\
+		,(1.00962e+008,5.67808e+006),(1.06734e+008,5.86525e+006),(1.12706e+008,6.07969e+006\
+		),(1.18915e+008,6.33995e+006),(1.25416e+008,6.66374e+006),(1.32177e+008,6.85797e+006\
+		),(1.39119e+008,7.02591e+006),(1.46231e+008,7.19871e+006),(1.53542e+008,7.42388e+006\
+		),(1.61098e+008,7.69011e+006),(1.68904e+008,7.92251e+006),(1.76932e+008,8.13304e+006\
+		),(1.85168e+008,8.33844e+006),(1.93618e+008,8.56386e+006),(2.02278e+008,8.75639e+006\
+		) ))
+	~	m2
+	~		|
+
+ShiMen Reservoir Depth = WITH LOOKUP (
+	ShiMen Reservoir,
+		([(0,195)-(2.067e+008,245)],(0,195),(896296,196),(1.89843e+006,197),(3.00141e+006,198\
+		),(4.2111e+006,199),(5.49883e+006,200),(6.85434e+006,201),(8.27291e+006,202),(9.77081e+006\
+		,203),(1.13411e+007,204),(1.29775e+007,205),(1.46904e+007,206),(1.64853e+007,207),(\
+		1.83768e+007,208),(2.04074e+007,209),(2.25632e+007,210),(2.47986e+007,211),(2.71057e+007\
+		,212),(2.9498e+007,213),(3.19865e+007,214),(3.45703e+007,215),(3.72513e+007,216),(4.00261e+007\
+		,217),(4.29298e+007,218),(4.59992e+007,219),(4.92558e+007,220),(5.2845e+007,221),(5.68249e+007\
+		,222),(6.10739e+007,223),(6.5513e+007,224),(7.01011e+007,225),(7.4826e+007,226),(7.96996e+007\
+		,227),(8.47447e+007,228),(8.99704e+007,229),(9.53755e+007,230),(1.00962e+008,231),(\
+		1.06734e+008,232),(1.12706e+008,233),(1.18915e+008,234),(1.25416e+008,235),(1.32177e+008\
+		,236),(1.39119e+008,237),(1.46231e+008,238),(1.53542e+008,239),(1.61098e+008,240),(\
+		1.68904e+008,241),(1.76932e+008,242),(1.85168e+008,243),(1.93618e+008,244),(2.02278e+008\
+		,245) ))
+	~	m
+	~		|
+
+ShiMen Reservoir Evaporation=
+	ShiMen Reservoir Area*ShiMenReseverior Month Evaporation Table*0.001
+	~	m3
+	~	unit m^3 per day
+	|
+
+ShiMen Reservoir Inflow=
+	5e+006
+	~	m3
+	~	use 5000000 to test
+	|
+
+ShiMen Reservoir Max Volume=
+	2.02278e+008
+	~	m3
+	~	for depth=245m;
+		unit (m^3)
+	|
+
+ShiMen Reservoir Overflow=
+	IF THEN ELSE((ShiMen Reservoir Inflow-Transfer From ShiMenReservoir To HouChiWeir-Transfer From ShiMenReservoir To ShiMenAgriChannel
+	-ShiMen Reservoir Evaporation
+	+ShiMen Reservoir)>=(ShiMen Reservoir Max Volume), ShiMen Reservoir Inflow-Transfer From ShiMenReservoir To HouChiWeir\
+		-
+	Transfer From ShiMenReservoir To ShiMenAgriChannel-ShiMen Reservoir Evaporation
+	+ShiMen Reservoir-ShiMen Reservoir Max Volume, 0)
+	~	m3
+	~	assume no transfer loss
+	|
+
+ShiMen WPP=
+	Transfer From ShiMenReservoir To ShiMenAgriChannel*Ratio WPP ShiMenReservoir To ShiMenAgriChannel\
+		*Ratio ShiMenWPP At ShiMenAgriChannel*(1-WPP Transfer Loss Rate)
+	~	m3
+	~		|
+
+ShiMen WPP Adjusted=
+	ShiMen WPP
+	~	m3
+	~	Here assume that it equals to ShiMen WPP inflow.
+		WPP transfer loss is considered in the Demand section.
+	|
+
+ShiMen WPP Storage Pool= INTEG (
+	IF THEN ELSE(ShiMen WPP+ShiMen WPP Storage Pool-ShiMen WPP Adjusted>=500000, 0 , ShiMen WPP\
+		-ShiMen WPP Adjusted ),
+		500000)
+	~	m3
+	~	500000 m^3 Max Storage Pool Volume
+	|
+
+ShiMenReservoir Operation Rule Lower Limit = WITH LOOKUP (
+	Date,
+		([(1,190)-(366,250)],(1,240),(32,240),(152,220),(182,220),(244,225),(335,240),(365,\
+		240) ))
+	~	m
+	~		|
+
+ShiMenReservoir Operation Rule Lower Severe Limit = WITH LOOKUP (
+	Date,
+		([(1,190)-(366,250)],(1,225),(60,223),(91,220),(152,210),(182,210),(213,213),(274,213\
+		),(305,215),(365,225) ))
+	~	m
+	~		|
+
+ShiMenReservoir Operation Rule Upper Limit = WITH LOOKUP (
+	Date,
+		([(1,190)-(366,250)],(1,245),(32,245),(42,244.333),(52,243.667),(60,243),(91,240),(\
+		152,235),(182,235),(213,236),(244,240
+		),(274,240),(305,245),(365,245) ))
+	~	m
+	~		|
+
+ShiMenReseverior Month Evaporation Table = WITH LOOKUP (
+	Date,
+		([(1,0)-(365,4)],(1,1.348),(31,1.348),(32,1.292),(59,1.292),(60,1.415),(90,1.415),(\
+		91,1.72),(120,1.72),(121,2.168),(151,2.168),(152,2.694),(181,2.694),(182,3.611),(212\
+		,3.611),(213,3.383),(243,3.383),(244,2.871),(273,2.871),(274,3.151),(304,3.151),(305\
+		,2.097),(334,2.097),(335,1.875),(365,1.875) ))
+	~	mm
+	~		|
+
+South TaoYuan Water Demand=
+	(LongTan WPP+PingZhen WPP1+PingZhen WPP2+ShiMen WPP Adjusted+TaoChu TwoWay Support 2\
+		+TaoYuan Water Supply Network 1)*(1-Tap Water Loss Rate)-TaoChu TwoWay Support 1-TaoYuan Water Supply Network 2
+	~	m3
+	~		|
+
+Sum AgriWater HouChiWeir To TaoYuanAgriChannel=
+	Allocation TaoYuan AgriChannel AgriWater
+	~	m3
+	~		|
+
+Sum AgriWater HouChiWeir To ZhongZhuangWeir=
+	Allocation TaoYuanDaHanRiver AgriWater
+	~	m3
+	~		|
+
+Sum AgriWater ShiMenReservoir To HouChiWeir=
+	Allocation TaoYuan AgriChannel AgriWater+Allocation TaoYuanDaHanRiver AgriWater
+	~	m3
+	~		|
+
+Sum AgriWater ShiMenReservoir To ShiMenAgriChannel=
+	Allocation ShiMen AgriChannel AgriWater
+	~	m3
+	~		|
+
+Sum Allcation From ShiMenReservoir=
+	Sum Allocation ShiMenReservoir To HouChiWeir+Sum Allocation ShiMenReservoir To ShiMenAgriChannel
+	~	m3
+	~		|
+
+Sum Allocation HouChiWeir To TaoYuanAgriChannel=
+	Allocation NCSIST+Allocation TaoYuan CPC Refinery+Sum AgriWater HouChiWeir To TaoYuanAgriChannel\
+		+Sum WPP HouChiWeir To TaoYuanAgriChannel
+	~	m3
+	~	Just the sum to calculate the ratio in the "Transfer ratio" sheet.
+	|
+
+Sum Allocation HouChiWeir To ZhongZhuangWeir=
+	Sum AgriWater HouChiWeir To ZhongZhuangWeir+Sum WPP HouChiWeir To ZhongZhuangWeir
+	~	m3
+	~	Just the sum to calculate the ratio in the "Transfer ratio" sheet.
+	|
+
+Sum Allocation ShiMenReservoir To ShiMenAgriChannel=
+	Allocation NCSIST+Sum AgriWater ShiMenReservoir To ShiMenAgriChannel+Sum WPP ShiMenReservoir To ShiMenAgriChannel
+	~	m3
+	~		|
+
+Sum WPP HouChiWeir To TaoYuanAgriChannel=
+	Allocation DaNan WPP2
+	~	m3
+	~		|
+
+Sum WPP HouChiWeir To ZhongZhuangWeir=
+	Allocation BanXin WPP+Allocation DaNan WPP1
+	~	m3
+	~		|
+
+Sum WPP ShiMenReservoir To HouChiWeir=
+	Allocation BanXin WPP+Allocation DaNan WPP1+Allocation DaNan WPP2+Allocation PingZhen WPP2
+	~	m3
+	~		|
+
+Sum WPP ShiMenReservoir To ShiMenAgriChannel=
+	Allocation LongTan WPP+Allocation PingZhen WPP1+Allocation ShiMen WPP
+	~	m3
+	~		|
+
+Support EcoBaseFlow=
+	Support For DaHan River Ecological Base Stream Flow
+	~	m3
+	~		|
+
+Support For DaHan River Ecological Base Stream Flow=
+	MIN(ShiMen Reservoir, MAX(0, YuanShan Weir Ecological Base Stream Flow-YuanShan Lateral Flow\
+		 ) )
+	~	m3
+	~	Below YuanShanWeir, need 2.3cms (198720 m^3 per day) for Ecological Base \
+		Stream Flow.
+	|
+
+Taipei Water Department Source=
+	IF THEN ELSE(ShiMen Reservoir Depth>243, 300000 , 650000 )
+	~	m3
+	~	BanXin WPP purchasing rule
+	|
+
+TaoChu TwoWay Support 1=
+	10000
+	~	m3
+	~	assume 10000 m^3 per day
+	|
+
+TaoChu TwoWay Support 2=
+	0
+	~	m3
+	~	assume zero
+	|
+
+TaoYuan AgriChannel=
+	Transfer From HouChiWeir To TaoYuanAgriChannel-Transfer From TaoYuanAgriChannel To DaNanWPP\
+		-Transfer From TaoYuanAgriChannel To NCSIST-Transfer From TaoYuanAgriChannel To TaoYuanAgriWaterDemand\
+		-Transfer From TaoYuanAgriChannel To TaoYuanCPCRefinery-TaoYuan AgriChannel Transfer Loss Amount
+	~	m3
+	~	Should be zero(all in and out)
+	|
+
+TaoYuan AgriChannel AgriWater Actual Consumption=
+	0
+	~	m3
+	~	need to input data file;
+		asume zero for test.
+	|
+
+TaoYuan AgriChannel AgriWater Demand=
+	Transfer From TaoYuanAgriChannel To TaoYuanAgriWaterDemand-TaoYuan Irrigation Area Outflow\
+		-TaoYuan AgriChannel Irrigation Transfer Loss Amount
+	~	m3
+	~		|
+
+TaoYuan AgriChannel Irrigation Transfer Loss Amount=
+	Transfer From TaoYuanAgriChannel To TaoYuanAgriWaterDemand*TaoYuan AgriChannel Irrigation Transfer Loss Rate
+	~	m3
+	~		|
+
+TaoYuan AgriChannel Irrigation Transfer Loss Rate=
+	0
+	~	m3/m3
+	~	This is "no loss rate" version.
+	|
+
+TaoYuan AgriChannel Transfer Loss Amount=
+	(Transfer From TaoYuanAgriChannel To NCSIST+Transfer From TaoYuanAgriChannel To TaoYuanAgriWaterDemand\
+		+Transfer From TaoYuanAgriChannel To TaoYuanCPCRefinery)/(1-Channel Transfer Loss Rate\
+		)*Channel Transfer Loss Rate+Transfer From TaoYuanAgriChannel To DaNanWPP/(1-WPP Transfer Loss Rate\
+		)*WPP Transfer Loss Rate
+	~	m3
+	~		|
+
+TaoYuan Irrigation Area Outflow=
+	Transfer From TaoYuanAgriChannel To TaoYuanAgriWaterDemand-TaoYuan AgriChannel AgriWater Actual Consumption\
+		-TaoYuan AgriChannel Irrigation Transfer Loss Amount
+	~	m3
+	~		|
+
+TaoYuan Water Supply Network 1=
+	0
+	~	m3
+	~	primary design assumes zero in this model, which means does not consider \
+		the impact of this pipeline.
+	|
+
+TaoYuan Water Supply Network 2=
+	0
+	~	m3
+	~	primary design assumes zero in this model, which means does not consider \
+		the impact of this pipeline.
+	|
+
+TaoYuanDaHanRiver AgriWater Demand=
+	Transfer From ZhongZhuangWeir To TaoYuanDaHanRiver AgriWater Demand-Irrigation Tranfer Loss Amount
+	~	m3
+	~		|
+
+Tap Water Loss Rate=
+	0.1616
+	~	m3/m3
+	~	Tap water loss rate in 2016
+	|
+
+TargetYear DomesticWaterDemand=
+	704604
+	~	m3
+	~	total domestic water consumption is 257180530 m^3 in year 2016;
+		Around 704604 m^3 per day.
+	|
+
+TargetYear IndustryWaterDemand=
+	351204
+	~	m3
+	~	total industry water consumption is 128189600 m^3 in year 2016;
+		Around 351204 m^3 per day.
+	|
+
+Total Allocation Proportion At HouChiWeir=
+	Allocation Proportion of BanXinWPP+Allocation Proportion of DaNanWPP1+Allocation Proportion of DaNanWPP2\
+		+Allocation Proportion of PingZhenWPP2
+	~	m3/m3
+	~		|
+
+Total Allocation Proportion At ShiMenAgriChannel=
+	Allocation Proportion of LongTanWPP+Allocation Proportion of PingZhenWPP1+Allocation Proportion of ShiMenWPP
+	~	m3/m3
+	~		|
+
+Total Allocation Proportion At ZhongZhuangWeir=
+	Allocation Proportion of BanXinWPP+Allocation Proportion of DaNanWPP1
+	~	m3/m3
+	~		|
+
+Total WPP Allocation=
+	Allocation BanXin WPP+Allocation DaNan WPP1+Allocation DaNan WPP2+Allocation LongTan WPP\
+		+Allocation PingZhen WPP1+Allocation PingZhen WPP2
++Allocation ShiMen WPP
+	~	m3
+	~	Not include NCSIST and CPC Refinery, it's used to calculate each WPP's \
+		proportion.
+	|
+
+Total WPP Allocation At HouChiWeir=
+	Allocation BanXin WPP+Allocation DaNan WPP1+Allocation DaNan WPP2+Allocation PingZhen WPP2
+	~	m3
+	~		|
+
+Total WPP Allocation At ShiMenAgriChannel=
+	Allocation LongTan WPP+Allocation PingZhen WPP1+Allocation ShiMen WPP
+	~	m3
+	~		|
+
+Total WPP Allocation At YuanShanWeir=
+	Allocation BanXin WPP+Allocation DaNan WPP1
+	~	m3
+	~		|
+
+Tranfer From YuanShanWeir To DaNanWPP=
+	IF THEN ELSE((Transfer From ZhongZhuangWeir To YuanShanWeir-EcoBaseFlow)*Ratio BanXinWPP Allocation At YuanShanWeir\
+		>Allocation BanXin WPP, MIN(350000, Transfer From ZhongZhuangWeir To YuanShanWeir-EcoBaseFlow\
+		-Allocation BanXin WPP) , (Transfer From ZhongZhuangWeir To YuanShanWeir-EcoBaseFlow\
+		)*Ratio DaNanWPP1 Allocation At YuanShanWei )*(1-WPP Transfer Loss Rate)
+	~	m3
+	~	Channel max ability = 350000 m^3 per day
+	|
+
+Transfer From BanXinWPP To BanXinWaterDemand=
+	Taipei Water Department Source+Transfer From SanXiaWeir To BanXinWPP+Transfer From YuanShanWeir To BanXinWPP\
+		+Transfer From ZhongZhuangAdjustmentReservoir To BanXinWPP-Transfer From BanXinWPP To NorthTaoYuanWaterDemand
+	~	m3
+	~	WPP transfer loss is considered in the Demand section
+	|
+
+Transfer From BanXinWPP To NorthTaoYuanWaterDemand=
+	170000
+	~	m3
+	~	Assume 170000 m^3 per day.
+		WPP transfer loss is considered in the Demand section.
+	|
+
+Transfer From DaNanWPP To NorthTaoYuanWaterDemand=
+	Tranfer From YuanShanWeir To DaNanWPP+Transfer From TaoYuanAgriChannel To DaNanWPP+Transfer From ZhongZhuangAdjustmentReservoir To DaNanWPP
+	~	m3
+	~	WPP transfer loss is considered in the Demand section
+	|
+
+Transfer From HouChiWeir To TaoYuanAgriChannel=
+	Transfer From ShiMenReservoir To HouChiWeir*(Ratio WPP ShiMenReservoir To HouChiWeir\
+		*Ratio DaNanWPP2 At HouChiWeir+Ratio AgriWater ShiMenReservoir To HouChiWeir In TaoYuanAgriChannel\
+		+Ratio NCSIST At HouChiWeir+Ratio TaoYuan CPC Refinery At HouChiWeir
+	)
+	~	m3
+	~	assume no transfer loss
+		should include the results of operation rule, each allocation under each \
+		situation
+	|
+
+Transfer From HouChiWeir To ZhongZhuangWeir=
+	Transfer From ShiMenReservoir To HouChiWeir+ShiMen Reservoir Overflow+Support EcoBaseFlow\
+		-Transfer From HouChiWeir To TaoYuanAgriChannel-PingZhen WPP2/(1-WPP Transfer Loss Rate\
+		)
+	~	m3
+	~	Assume that he transfer loss between HouChiWeir and YuanShanWeir is \
+		considered and included in "YuanShan Lateral Flow".
+	|
+
+Transfer From SanXiaWeir To BanXinWPP=
+	IF THEN ELSE( SanXia River Inflow<=SanXia River Ecological Base Stream Flow, 0 , MIN\
+		(530000,(SanXia River Inflow
+	-SanXia River Ecological Base Stream Flow))*(1-WPP Transfer Loss Rate))
+	~	m3
+	~	intake constraint is 530000(cubic meter per day)
+	|
+
+Transfer From ShiMenAgriChannel To NCSIST=
+	Transfer From ShiMenReservoir To ShiMenAgriChannel*Ratio NCSIST At ShiMenAgriChannel\
+		*(1-Channel Transfer Loss Rate)
+	~	m3
+	~		|
+
+Transfer From ShiMenAgriChannel To ShiMenAgriWaterDemand=
+	Transfer From ShiMenReservoir To ShiMenAgriChannel*Ratio AgriWater ShiMenReservoir To ShiMenAgriChannel\
+		*(1-Channel Transfer Loss Rate)
+	~	m3
+	~		|
+
+Transfer From ShiMenReservoir To HouChiWeir=
+	Final Allocation ShiMenReservoir To HouChiWeir
+	~	m3
+	~	assume no transfer loss
+		includes DaHan River Ecological Base Stream Flow
+	|
+
+Transfer From ShiMenReservoir To ShiMenAgriChannel=
+	Final Allocation ShiMenReservoir To ShiMenAgriChannel
+	~	m3
+	~	assume no transfer loss;
+		should include the results of operation rule, each allocation under each \
+		situation
+	|
+
+Transfer From TaoYuanAgriChannel To DaNanWPP=
+	Transfer From ShiMenReservoir To HouChiWeir*Ratio WPP ShiMenReservoir To HouChiWeir*\
+		Ratio DaNanWPP2 At HouChiWeir*(1-WPP Transfer Loss Rate)
+	~	m3
+	~		|
+
+Transfer From TaoYuanAgriChannel To NCSIST=
+	Transfer From ShiMenReservoir To HouChiWeir*Ratio NCSIST At HouChiWeir*(1-Channel Transfer Loss Rate\
+		)
+	~	m3
+	~		|
+
+Transfer From TaoYuanAgriChannel To TaoYuanAgriWaterDemand=
+	(Transfer From ShiMenReservoir To HouChiWeir*Ratio AgriWater ShiMenReservoir To HouChiWeir In TaoYuanAgriChannel\
+		)*(1-Channel Transfer Loss Rate
+	)
+	~	m3
+	~		|
+
+Transfer From TaoYuanAgriChannel To TaoYuanCPCRefinery=
+	Transfer From ShiMenReservoir To HouChiWeir*Ratio TaoYuan CPC Refinery At HouChiWeir\
+		*(1-Channel Transfer Loss Rate)
+	~	m3
+	~		|
+
+Transfer From YuanShanWeir To BanXinWPP=
+	MIN( 600000 , Transfer From ZhongZhuangWeir To YuanShanWeir-EcoBaseFlow-Tranfer From YuanShanWeir To DaNanWPP\
+		/(1-WPP Transfer Loss Rate))*(1-WPP Transfer Loss Rate)
+	~	m3
+	~	assume use the limit of Power transmission culvert, which is 600000 m^3 \
+		per day as the constraint.
+	|
+
+Transfer From ZhongZhuangAdjustmentReservoir To BanXinWPP=
+	ZhongZhuang Support To BanXinWPP*(1-WPP Transfer Loss Rate)
+	~	m3
+	~		|
+
+Transfer From ZhongZhuangAdjustmentReservoir To DaNanWPP=
+	ZhongZhuang Support To DaNanWPP*(1-WPP Transfer Loss Rate)
+	~	m3
+	~		|
+
+Transfer From ZhongZhuangWeir To TaoYuanDaHanRiver AgriWater Demand=
+	Transfer From ShiMenReservoir To HouChiWeir*Ratio AgriWater ShiMenReservoir To HouChiWeir In DaHanRiver\
+		*(1-Channel Transfer Loss Rate)
+	~	m3
+	~		|
+
+Transfer From ZhongZhuangWeir To YuanShanWeir=
+	Transfer From HouChiWeir To ZhongZhuangWeir+YuanShan Lateral Flow-(Transfer From ZhongZhuangWeir To TaoYuanDaHanRiver AgriWater Demand\
+		+Transfer From ZhongZhuangWeir To ZhongZhuangAdjustmentReservoir)/(1-Channel Transfer Loss Rate\
+		)
+	~	m3
+	~	Assume that the transfer loss between HouChiWeir and YuanShanWeir is \
+		considered and included in "YuanShan Lateral Flow".
+	|
+
+Transfer From ZhongZhuangWeir To ZhongZhuangAdjustmentReservoir=
+	(Transfer From HouChiWeir To ZhongZhuangWeir+YuanShan Lateral Flow-Transfer From ZhongZhuangWeir To TaoYuanDaHanRiver AgriWater Demand\
+		/(1-Channel Transfer Loss Rate))*Ratio ZhongZhuangAdjustmentReservoir take*(1-Channel Transfer Loss Rate\
+		)
+	~	m3
+	~	do not consider it in the Market Version, so "Ratio \
+		ZhongZhuangAdjustmentReservoir take" is zero here.
+	|
+
+Water Right BanXin WPP=
+	123
+	~	m3
+	~	source from YuanShan Weir;
+		input data.
+	|
+
+Water Right DaNan WPP1=
+	123
+	~	m3
+	~	source from TaoYuan AgriChannel;
+		input data.
+	|
+
+Water Right DaNan WPP2=
+	123
+	~	m3
+	~	source from TaoYuan AgriChannel;
+		input data.
+	|
+
+Water Right PingZhen WPP1=
+	123
+	~	m3
+	~	because in different Ten-days, the allocated water right is different, use this \
+		variable to identify.
+		input data.
+	|
+
+Water Right PingZhen WPP2=
+	123
+	~	m3
+	~	source from YuanShan Weir;
+		input data.
+	|
+
+Water Right ShiMen AgriChannel AgriWater=
+	123
+	~	m3
+	~	input data.
+	|
+
+Water Right ShiMenLongTan WPP=
+	123
+	~	m3
+	~	because in different Ten-days, the allocated water right is different, use this \
+		variable to identify.
+		input data.
+	|
+
+Water Right TaoYuan AgriChannel AgriWater=
+	123
+	~	m3
+	~	input data.
+	|
+
+Water Right TaoYuan CPC Refinery=
+	123
+	~	m3
+	~	source from TaoYuan AgriChannel;
+		input data.
+	|
+
+Water Right TaoYuanDaHanRiver AgriWater=
+	123
+	~	m3
+	~	input data.
+	|
+
+WPP Transfer Loss Rate=
+	0
+	~	m3/m3
+	~	Assume 0% WPP transfer loss rate.
+	|
+
+YuanShan Lateral Flow=
+	300000
+	~	m3
+	~	No further data, so assume that All the YuanShan Lateral Flow comes into the point \
+		of ZhongZhuang Weir;
+		The transfer loss between HouChiWeir and YuanShanWeir is considered and included in \
+		this variable.
+		use 300000 to test
+	|
+
+YuanShan Weir=
+	Transfer From ZhongZhuangWeir To YuanShanWeir-EcoBaseFlow-Tranfer From YuanShanWeir To DaNanWPP\
+		-Transfer From YuanShanWeir To BanXinWPP-YuanShanWeir Transfer Loss Amount-YuanShan Weir Outflow
+	~	m3
+	~	max effective storage volume = 4900000 m^3.
+	|
+
+YuanShan Weir Ecological Base Stream Flow=
+	198720
+	~	m3
+	~	2.3cms, equals 198720 m^3 per day
+	|
+
+YuanShan Weir Outflow=
+	Transfer From ZhongZhuangWeir To YuanShanWeir-EcoBaseFlow-Tranfer From YuanShanWeir To DaNanWPP\
+		-Transfer From YuanShanWeir To BanXinWPP-YuanShanWeir Transfer Loss Amount
+	~	m3
+	~	May be zero because some included in "EcoBaseFlow".
+	|
+
+YuanShanWeir Transfer Loss Amount=
+	(Tranfer From YuanShanWeir To DaNanWPP+Transfer From YuanShanWeir To BanXinWPP)/(1-WPP Transfer Loss Rate\
+		)*WPP Transfer Loss Rate
+	~	m3
+	~		|
+
+ZhongZhuang Adjustment Reservoir= INTEG (
+	IF THEN ELSE(Transfer From ZhongZhuangWeir To ZhongZhuangAdjustmentReservoir+ZhongZhuang Adjustment Reservoir\
+		-Transfer From ZhongZhuangAdjustmentReservoir To BanXinWPP-Transfer From ZhongZhuangAdjustmentReservoir To DaNanWPP\
+		-ZhongZhuangAdjustmentReservoir Transfer Loss Amount>=5.05e+006, 0 , Transfer From ZhongZhuangWeir To ZhongZhuangAdjustmentReservoir\
+		-Transfer From ZhongZhuangAdjustmentReservoir To BanXinWPP-Transfer From ZhongZhuangAdjustmentReservoir To DaNanWPP\
+		-ZhongZhuangAdjustmentReservoir Transfer Loss Amount ),
+		5.05e+006)
+	~	m3
+	~	Max Storage Valume = 5050000 m^3 (2017);
+		general output = 24000 m^3 per day(BanXin WPP assumes 15000 m^3; DaNan WPP assumes \
+		9000 m^3 ;
+		overflow height 68m, designed flood discharge 2.83CMS, water input limit \
+		10cms.
+	|
+
+ZhongZhuang Support To BanXinWPP=
+	0
+	~	m3
+	~	do not consider it in the Market Version
+	|
+
+ZhongZhuang Support To DaNanWPP=
+	0
+	~	m3
+	~	do not consider it in the Market Version
+	|
+
+ZhongZhuang Weir=
+	Transfer From HouChiWeir To ZhongZhuangWeir+YuanShan Lateral Flow-(Transfer From ZhongZhuangWeir To TaoYuanDaHanRiver AgriWater Demand\
+		+Transfer From ZhongZhuangWeir To ZhongZhuangAdjustmentReservoir)/(1-Channel Transfer Loss Rate\
+		)-Transfer From ZhongZhuangWeir To YuanShanWeir
+	~	m3
+	~	Should be zero(all in and out)
+	|
+
+ZhongZhuangAdjustmentReservoir Transfer Loss Amount=
+	(ZhongZhuang Support To BanXinWPP+ZhongZhuang Support To DaNanWPP)*WPP Transfer Loss Rate
+	~	m3
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 364
+	~	Day
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Day
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Day [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Day [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*System Model
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|128-128-128|-1--1--1|-1--1--1|96,96,110,0
+10,1,ShiMen Reservoir,153,-739,70,29,3,131,0,4,0,0,0,0,-1--1--1,128-192-255,|12||0-0-0
+12,2,48,142,-882,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(143,-799)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(143,-858)|
+11,5,48,143,-836,8,6,33,3,0,0,4,0,0,0
+10,6,ShiMen Reservoir Inflow,196,-836,45,22,35,131,0,3,-1,0,0,0,128-0-64,0-0-0,|12||0-0-255
+10,7,HouChi Weir,143,-532,45,32,3,131,0,4,0,0,0,0,-1--1--1,192-192-192,|12||0-0-0
+10,8,YuanShan Weir,-52,-321,39,19,3,131,0,4,0,0,0,0,-1--1--1,192-192-192,|12||0-0-0
+10,9,SanXia Weir,-157,-463,37,20,3,131,0,4,0,0,0,0,-1--1--1,192-192-192,|12||0-0-0
+10,10,BanXin WPP,-52,-85,39,19,3,131,0,0,0,0,0,0
+12,11,48,-159,-630,10,8,0,3,0,0,-1,0,0,0
+1,12,14,9,4,0,0,22,0,0,0,-1--1--1,,1|(-158,-512)|
+1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(-158,-587)|
+11,14,48,-158,-547,8,6,33,3,0,0,4,0,0,0
+10,15,SanXia River Inflow,-110,-547,40,19,35,131,0,3,-1,0,0,0,128-0-64,0-0-0,|12||0-0-255
+10,16,DaNan WPP,94,15,44,24,3,131,0,0,0,0,0,0
+10,17,ShiMen AgriChannel,446,-570,77,18,3,131,0,1,0,0,0,0,64-160-98,0-0-0,|12||0-0-0
+10,18,TaoYuan AgriChannel,430,-510,72,15,3,131,0,1,0,0,0,0,64-160-98,0-0-0,|12||0-0-0
+10,19,ZhongZhuang Adjustment Reservoir,307,-265,45,22,3,131,0,4,0,0,0,0,-1--1--1,128-192-255,|12||0-0-0
+10,20,North TaoYuan Water Demand,106,275,54,31,3,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,21,South TaoYuan Water Demand,830,267,69,28,3,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,22,Domestic Water Demand,350,444,39,30,3,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,23,Industry Water Demand,583,446,44,30,3,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,24,Public Water Demand,460,383,48,26,3,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,25,ShiMen AgriChannel AgriWater Demand,1146,-570,66,28,3,131,0,1,0,0,0,0,64-160-98,0-0-0,|12||0-0-0
+10,26,TaoYuan AgriChannel AgriWater Demand,545,183,66,27,3,131,0,1,0,0,0,0,64-160-98,0-0-0,|12||0-0-0
+10,27,BanXin Water Demand,-153,126,54,29,3,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,28,HsinChu Water Demand,1094,267,58,30,3,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+1,29,31,7,4,0,0,22,0,0,0,-1--1--1,,1|(183,-595)|
+1,30,31,1,100,0,0,22,0,0,0,-1--1--1,,1|(183,-674)|
+11,31,1452,183,-633,8,6,33,3,0,0,4,0,0,0
+10,32,Transfer From ShiMenReservoir To HouChiWeir,261,-633,70,19,40,131,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+1,33,35,18,4,0,0,22,0,0,0,-1--1--1,,1|(345,-510)|
+1,34,35,7,100,0,0,22,0,0,0,-1--1--1,,1|(254,-510)|
+11,35,1340,326,-510,6,8,34,3,0,0,1,0,0,0
+10,36,Transfer From HouChiWeir To TaoYuanAgriChannel,326,-484,47,18,40,3,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+1,37,39,17,4,0,0,22,0,0,0,-1--1--1,,1|(446,-739)|
+1,38,39,1,100,0,0,22,0,0,0,-1--1--1,,1|(267,-739)|
+11,39,1388,317,-739,6,8,34,3,0,0,1,0,0,0
+10,40,Transfer From ShiMenReservoir To ShiMenAgriChannel,317,-713,45,18,40,131,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+1,41,43,10,4,0,0,22,0,0,0,-1--1--1,,1|(-54,-143)|
+1,42,43,8,100,0,0,22,0,0,0,-1--1--1,,1|(-54,-248)|
+11,43,1580,-54,-187,8,6,33,3,0,0,4,0,0,0
+10,44,Transfer From YuanShanWeir To BanXinWPP,1,-187,47,15,40,131,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||0-128-255
+1,45,47,16,4,0,0,22,0,0,0,-1--1--1,,3|(98,-49)|(98,-49)|(98,-29)|
+1,46,47,8,100,0,0,22,0,0,0,-1--1--1,,1|(98,-321)|
+11,47,860,98,-154,8,6,33,3,0,0,4,0,0,0
+10,48,Tranfer From YuanShanWeir To DaNanWPP,147,-154,41,18,40,131,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||0-128-255
+1,49,51,10,4,0,0,22,0,0,0,-1--1--1,,1|(-157,-85)|
+1,50,51,9,100,0,0,22,0,0,0,-1--1--1,,1|(-157,-282)|
+11,51,940,-157,-113,6,8,34,3,0,0,1,0,0,0
+10,52,Transfer From SanXiaWeir To BanXinWPP,-157,-77,50,28,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-128-255
+1,53,55,27,4,0,0,22,0,0,0,-1--1--1,,1|(-73,126)|
+1,54,55,10,100,0,0,22,0,0,0,-1--1--1,,1|(-73,-30)|
+11,55,844,-73,14,6,8,34,3,0,0,1,0,0,0
+10,56,Transfer From BanXinWPP To BanXinWaterDemand,-73,40,47,18,40,3,0,10,-1,0,0,0,-1--1--1,128-64-0,|8||0-128-255
+1,57,59,20,4,0,0,22,0,0,0,-1--1--1,,1|(-29,275)|
+1,58,59,10,100,0,0,22,0,0,0,-1--1--1,,1|(-29,27)|
+11,59,780,-29,128,6,8,34,3,0,0,1,0,0,0
+10,60,Transfer From BanXinWPP To NorthTaoYuanWaterDemand,-29,154,62,18,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||0-128-255
+1,61,63,20,4,0,0,22,0,0,0,-1--1--1,,1|(100,182)|
+1,62,63,16,100,0,0,22,0,0,0,-1--1--1,,1|(100,74)|
+11,63,892,100,115,8,6,33,3,0,0,4,0,0,0
+10,64,Transfer From DaNanWPP To NorthTaoYuanWaterDemand,170,115,62,18,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||0-128-255
+12,65,48,1148,-756,10,8,0,3,0,0,-1,0,0,0
+1,66,68,65,4,0,0,22,0,0,0,-1--1--1,,1|(1155,-715)|
+1,67,68,25,100,0,0,22,0,0,0,-1--1--1,,1|(1155,-632)|
+11,68,48,1155,-675,6,8,34,3,0,0,1,0,0,0
+10,69,ShiMen Irrigation Area Outflow,1155,-655,39,12,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||0-64-128
+1,70,72,16,4,0,0,22,0,0,0,-1--1--1,,3|(540,25)|(539,25)|(339,25)|
+1,71,72,18,100,0,0,22,0,0,0,-1--1--1,,3|(540,-510)|(539,-510)|(521,-510)|
+11,72,2492,540,-29,6,8,34,3,0,0,1,0,0,0
+10,73,Transfer From TaoYuanAgriChannel To DaNanWPP,540,-3,80,28,40,131,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-128-255
+1,74,76,16,4,0,0,22,0,0,0,-1--1--1,,1|(321,15)|
+1,75,76,19,100,0,0,22,0,0,0,-1--1--1,,1|(321,-160)|
+11,76,956,321,-69,6,8,34,3,0,0,1,0,0,0
+10,77,Transfer From ZhongZhuangAdjustmentReservoir To DaNanWPP,321,-43,74,18,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||0-128-255
+1,78,80,10,4,0,0,22,0,0,0,-1--1--1,,1|(95,-88)|
+1,79,80,19,100,0,0,22,0,0,0,-1--1--1,,1|(307,-88)|
+11,80,972,209,-88,6,8,34,3,0,0,1,0,0,0
+10,81,Transfer From ZhongZhuangAdjustmentReservoir To BanXinWPP,209,-62,74,18,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||0-128-255
+1,82,84,26,4,0,0,22,0,0,0,-1--1--1,,1|(540,101)|
+1,83,84,18,100,0,0,22,0,0,0,-1--1--1,,1|(540,-510)|
+11,84,876,540,39,6,8,34,3,0,0,1,0,0,0
+10,85,Transfer From TaoYuanAgriChannel To TaoYuanAgriWaterDemand,540,75,90,28,40,131,0,0,-1,0,0,0
+1,86,88,25,4,0,0,22,0,0,0,-1--1--1,,1|(1011,-570)|
+1,87,88,17,100,0,0,22,0,0,0,-1--1--1,,1|(727,-570)|
+11,88,2780,937,-570,6,8,34,3,0,0,1,0,0,0
+10,89,Transfer From ShiMenAgriChannel To ShiMenAgriWaterDemand,937,-543,57,18,40,131,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+10,90,ZhongZhuang Weir,153,-435,48,21,3,131,0,4,0,0,0,0,-1--1--1,192-192-192,|12||0-0-0
+12,91,48,-35,-510,10,8,0,3,0,0,-1,0,0,0
+1,92,94,90,4,0,0,22,0,0,0,-1--1--1,,1|(-40,-435)|
+1,93,94,91,100,0,0,22,0,0,0,-1--1--1,,1|(-40,-483)|
+11,94,48,-40,-457,6,8,34,3,0,0,1,0,0,0
+10,95,YuanShan Lateral Flow,-40,-429,51,20,35,131,0,3,-1,0,0,0,128-0-64,0-0-0,|12||0-0-255
+1,96,98,90,4,0,0,22,0,0,0,-1--1--1,,1|(153,-465)|
+1,97,98,7,100,0,0,22,0,0,0,-1--1--1,,1|(153,-493)|
+11,98,2732,153,-480,8,6,33,3,0,0,4,0,0,0
+10,99,Transfer From HouChiWeir To ZhongZhuangWeir,202,-480,41,18,40,3,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+1,100,102,19,4,0,0,22,0,0,0,-1--1--1,,1|(310,-347)|
+1,101,102,90,100,0,0,22,0,0,0,-1--1--1,,1|(310,-435)|
+11,102,1404,310,-414,6,8,34,3,0,0,1,0,0,0
+10,103,Transfer From ZhongZhuangWeir To ZhongZhuangAdjustmentReservoir,310,-389,46,17,40,131,0,8,-1,0,0,0,-1--1--1,0-0-0,|6||255-0-0
+1,104,106,8,4,0,0,22,0,0,0,-1--1--1,,1|(-52,-380)|
+1,105,106,90,100,0,0,22,0,0,0,-1--1--1,,1|(153,-380)|
+11,106,2956,61,-380,6,8,34,3,0,0,1,0,0,0
+10,107,Transfer From ZhongZhuangWeir To YuanShanWeir,61,-354,48,18,40,3,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+12,108,48,296,186,10,8,0,3,0,0,-1,0,0,0
+1,109,111,108,4,0,0,22,0,0,0,-1--1--1,,1|(321,180)|
+1,110,111,26,100,0,0,22,0,0,0,-1--1--1,,1|(416,180)|
+11,111,48,344,180,8,6,33,3,0,0,4,0,0,0
+10,112,TaoYuan Irrigation Area Outflow,412,180,60,19,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-64-128
+1,113,115,21,4,0,0,22,0,0,0,-1--1--1,,1|(935,288)|
+1,114,115,28,100,0,0,22,0,0,0,-1--1--1,,1|(1009,288)|
+11,115,2860,977,288,6,8,34,3,0,0,1,0,0,0
+10,116,TaoChu TwoWay Support 2,977,308,40,12,40,3,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+1,117,119,28,4,0,0,22,0,0,0,-1--1--1,,1|(1010,246)|
+1,118,119,21,100,0,0,22,0,0,0,-1--1--1,,1|(935,246)|
+11,119,1484,978,246,6,8,34,3,0,0,1,0,0,0
+10,120,TaoChu TwoWay Support 1,978,266,40,12,40,3,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+1,121,24,22,1,0,0,0,0,64,0,-1--1--1,,1|(430,429)|
+1,122,24,23,1,0,0,0,0,64,0,-1--1--1,,1|(507,434)|
+1,123,125,21,4,0,0,22,0,0,0,-1--1--1,,1|(613,253)|
+1,124,125,20,100,0,0,22,0,0,0,-1--1--1,,1|(306,253)|
+11,125,1468,459,253,6,8,34,3,0,0,1,0,0,0
+10,126,TaoYuan Water Supply Network 1,459,273,40,12,40,3,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+1,127,129,20,4,0,0,22,0,0,0,-1--1--1,,1|(305,291)|
+1,128,129,21,100,0,0,22,0,0,0,-1--1--1,,1|(612,291)|
+11,129,1660,457,291,6,8,34,3,0,0,1,0,0,0
+10,130,TaoYuan Water Supply Network 2,457,311,40,12,40,3,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+10,131,WPP Transfer Loss Rate,1285,-229,59,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-192
+1,132,134,21,4,0,0,22,0,0,0,-1--1--1,,1|(833,2)|
+1,133,134,17,100,0,0,22,0,0,0,-1--1--1,,1|(833,-570)|
+11,134,1436,833,-242,6,8,34,3,0,0,1,0,0,0
+10,135,PingZhen WPP1,833,-218,55,16,40,131,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-128-255
+1,136,138,21,4,0,0,22,0,0,0,-1--1--1,,1|(773,-40)|
+1,137,138,17,100,0,0,22,0,0,0,-1--1--1,,1|(773,-570)|
+11,138,1676,773,-327,6,8,34,3,0,0,1,0,0,0
+10,139,LongTan WPP,773,-308,48,11,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-128-255
+10,140,ShiMen AgriChannel Irrigation Transfer Loss Rate,1286,-106,62,34,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-192
+10,141,TaoYuan AgriChannel Irrigation Transfer Loss Rate,1293,-22,69,32,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-192
+10,142,ShiMen AgriChannel Irrigation Transfer Loss Rate,1338,-464,97,24,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,143,TaoYuan AgriChannel Irrigation Transfer Loss Rate,344,225,76,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,144,ShiMen AgriChannel AgriWater Actual Consumption,1306,-706,73,22,3,131,0,3,0,0,0,0,128-0-64,0-0-0,|12||255-0-0
+10,145,TaoYuan AgriChannel AgriWater Actual Consumption,329,130,77,22,3,131,0,3,0,0,0,0,128-0-64,0-0-0,|12||255-0-0
+1,146,89,69,1,0,0,0,0,64,0,-1--1--1,,1|(1006,-627)|
+1,147,85,112,1,0,0,0,0,64,0,-1--1--1,,1|(440,161)|
+12,148,48,705,-398,10,8,0,3,0,0,-1,0,0,0
+1,149,151,148,4,0,0,22,0,0,0,-1--1--1,,1|(704,-450)|
+1,150,151,17,100,0,0,22,0,0,0,-1--1--1,,1|(704,-570)|
+11,151,48,704,-502,6,8,34,3,0,0,1,0,0,0
+10,152,Transfer From ShiMenAgriChannel To NCSIST,704,-460,68,34,40,131,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+12,153,48,705,-400,10,8,0,3,0,0,-1,0,0,0
+1,154,156,153,4,0,0,22,0,0,0,-1--1--1,,3|(579,-397)|(579,-397)|(637,-397)|
+1,155,156,18,100,0,0,22,0,0,0,-1--1--1,,1|(540,-510)|
+11,156,48,540,-397,8,6,33,3,0,0,4,0,0,0
+10,157,Transfer From TaoYuanAgriChannel To NCSIST,610,-397,62,22,40,131,0,10,-1,0,0,0,-1--1--1,0-0-0,|10||255-128-0
+12,158,48,486,-268,10,8,0,3,0,0,-1,0,0,0
+1,159,161,158,4,0,0,22,0,0,0,-1--1--1,,3|(543,-267)|(543,-268)|(520,-268)|
+1,160,161,18,100,0,0,22,0,0,0,-1--1--1,,1|(540,-510)|
+11,161,48,540,-267,8,6,33,3,0,0,4,0,0,0
+10,162,Transfer From TaoYuanAgriChannel To TaoYuanCPCRefinery,630,-267,80,28,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,163,Channel Transfer Loss Rate,1290,-175,55,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-192
+10,164,Channel Transfer Loss Rate,324,82,40,12,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+10,165,Channel Transfer Loss Rate,997,-669,59,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,166,165,89,1,0,0,0,0,64,0,-1--1--1,,1|(932,-611)|
+10,167,Channel Transfer Loss Rate,683,-201,76,10,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+10,168,SanXia River Ecological Base Stream Flow,1294,111,77,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-128-0
+10,169,YuanShan Weir Ecological Base Stream Flow,1297,182,75,28,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-128-0
+12,170,48,1039,-467,10,8,0,3,0,0,-1,0,0,0
+1,171,173,170,4,0,0,22,0,0,0,-1--1--1,,1|(1035,-503)|
+1,172,173,17,100,0,0,22,0,0,0,-1--1--1,,1|(1035,-570)|
+11,173,48,1035,-540,6,8,34,3,0,0,1,0,0,0
+10,174,ShiMen AgriChannel Transfer Loss Amount,1035,-517,64,15,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|10||255-128-192
+1,175,165,174,1,0,0,0,0,64,0,-1--1--1,,1|(1001,-560)|
+12,176,48,1400,-569,10,8,0,3,0,0,-1,0,0,0
+1,177,179,176,4,0,0,22,0,0,0,-1--1--1,,1|(1347,-572)|
+1,178,179,25,100,0,0,22,0,0,0,-1--1--1,,1|(1252,-572)|
+11,179,48,1298,-572,6,8,34,3,0,0,1,0,0,0
+10,180,ShiMen AgriChannel Irrigation Transfer Loss Amount,1298,-546,50,18,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||255-128-192
+1,181,142,180,0,0,0,0,0,64,0,-1--1--1,,1|(1319,-501)|
+1,182,180,69,1,0,0,0,0,64,0,-1--1--1,,1|(1291,-578)|
+1,183,89,180,1,0,0,0,0,64,0,-1--1--1,,1|(1130,-624)|
+12,184,48,-232,-371,10,8,0,3,0,0,-1,0,0,0
+1,185,187,184,4,0,0,22,0,0,0,-1--1--1,,1|(-231,-417)|
+1,186,187,9,100,0,0,22,0,0,0,-1--1--1,,1|(-209,-463)|
+11,187,48,-231,-463,6,8,34,3,0,0,1,0,0,0
+10,188,SanXia Weir Outflow,-231,-436,42,19,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-64-128
+12,189,48,-109,-129,10,8,0,3,0,0,-1,0,0,0
+1,190,192,189,4,0,0,22,0,0,0,-1--1--1,,1|(-109,-188)|
+1,191,192,8,100,0,0,22,0,0,0,-1--1--1,,1|(-109,-321)|
+11,192,48,-109,-246,6,8,34,3,0,0,1,0,0,0
+10,193,YuanShan Weir Outflow,-109,-231,52,7,40,3,0,11,-1,0,0,0,0-64-128,0-0-0,|8||0-64-128
+10,194,SanXia River Ecological Base Stream Flow,-305,-138,50,18,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,195,194,52,0,0,0,0,0,64,0,-1--1--1,,1|(-240,-112)|
+10,196,SanXia River Inflow,-307,-97,47,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,197,196,52,0,0,0,0,0,64,0,-1--1--1,,1|(-240,-89)|
+12,198,48,-276,-248,10,8,0,3,0,0,-1,0,0,0
+1,199,201,198,4,0,0,22,0,0,0,-1--1--1,,3|(-197,-249)|(-197,-249)|(-231,-249)|
+1,200,201,9,100,0,0,22,0,0,0,-1--1--1,,1|(-157,-249)|
+11,201,48,-214,-249,6,8,34,3,0,0,1,0,0,0
+10,202,SanXiaWeir Transfer Loss Amount,-214,-221,68,20,40,131,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||255-128-192
+1,203,52,202,0,0,0,0,0,64,0,-1--1--1,,1|(-184,-147)|
+1,204,15,188,1,0,0,0,0,64,0,-1--1--1,,1|(-238,-498)|
+10,205,SanXia River Ecological Base Stream Flow,-305,-521,50,18,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,206,205,188,1,0,0,0,0,64,0,-1--1--1,,1|(-287,-447)|
+10,207,Transfer From SanXiaWeir To BanXinWPP,-353,-417,51,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,208,207,188,0,0,0,0,0,64,0,-1--1--1,,1|(-294,-426)|
+1,209,44,193,1,0,0,0,0,64,0,-1--1--1,,1|(-96,-196)|
+1,210,48,193,1,0,0,0,0,64,0,-1--1--1,,1|(38,-201)|
+1,211,213,7,4,0,0,22,0,0,0,-1--1--1,,1|(108,-576)|
+1,212,213,1,100,0,0,22,0,0,0,-1--1--1,,1|(108,-655)|
+11,213,844,108,-595,8,6,33,3,0,0,4,0,0,0
+10,214,ShiMen Reservoir Overflow,174,-595,58,7,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||0-64-128
+10,215,ShiMen Reservoir Max Volume,-8,-585,51,15,8,131,0,11,0,0,0,0,128-128-128,0-0-0,|10||128-128-128
+1,216,215,214,0,0,0,0,0,64,0,-1--1--1,,1|(73,-588)|
+1,217,6,214,0,0,0,0,0,64,0,-1--1--1,,1|(186,-714)|
+1,218,32,214,1,0,0,0,0,64,0,-1--1--1,,1|(212,-608)|
+1,219,1,214,1,0,0,0,0,64,0,-1--1--1,,1|(142,-705)|
+1,220,222,21,4,0,0,22,0,0,0,-1--1--1,,1|(804,18)|
+1,221,222,7,100,0,0,22,0,0,0,-1--1--1,,1|(804,-532)|
+11,222,2636,804,-211,6,8,34,3,0,0,1,0,0,0
+10,223,PingZhen WPP2,804,-192,53,11,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-128-255
+10,224,ShiMen WPP Storage Pool,887,-61,48,23,3,131,0,4,0,0,0,0,-1--1--1,128-192-255,|12||0-0-0
+1,225,167,162,0,0,0,0,0,64,0,-1--1--1,,1|(667,-220)|
+1,226,167,157,1,0,0,0,0,64,0,-1--1--1,,1|(666,-323)|
+1,227,144,69,0,1,0,0,0,64,0,-1--1--1,,1|(1222,-677)|
+1,228,167,152,1,0,0,0,0,64,0,-1--1--1,,1|(728,-360)|
+1,229,145,112,1,1,0,0,0,64,0,-1--1--1,,1|(373,166)|
+12,230,48,715,90,10,8,0,3,0,0,-1,0,0,0
+1,231,233,230,4,0,0,22,0,0,0,-1--1--1,,3|(637,92)|(637,92)|(671,92)|
+1,232,233,18,100,0,0,22,0,0,0,-1--1--1,,3|(540,-510)|(539,-510)|(521,-510)|
+11,233,48,540,92,6,8,34,3,0,0,1,0,0,0
+10,234,TaoYuan AgriChannel Transfer Loss Amount,540,115,71,19,40,131,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||255-128-192
+1,235,164,234,0,0,0,0,0,64,0,-1--1--1,,1|(410,94)|
+1,236,164,85,0,0,0,0,0,64,0,-1--1--1,,1|(401,79)|
+12,237,48,727,228,10,8,0,3,0,0,-1,0,0,0
+1,238,240,237,4,0,0,22,0,0,0,-1--1--1,,1|(558,228)|
+1,239,240,26,100,0,0,22,0,0,0,-1--1--1,,1|(552,208)|
+11,240,48,558,208,6,8,34,3,0,0,1,0,0,0
+10,241,TaoYuan AgriChannel Irrigation Transfer Loss Amount,558,238,67,22,40,131,0,10,-1,0,0,0,-1--1--1,0-0-0,|10||255-128-192
+1,242,143,241,0,0,0,0,0,64,0,-1--1--1,,1|(449,230)|
+1,243,85,241,1,0,0,0,0,64,0,-1--1--1,,1|(659,172)|
+1,244,241,112,1,0,0,0,0,64,0,-1--1--1,,1|(447,205)|
+1,245,247,224,4,0,0,22,0,0,0,-1--1--1,,1|(878,-118)|
+1,246,247,17,100,0,0,22,0,0,0,-1--1--1,,1|(878,-570)|
+11,247,2876,878,-159,6,8,34,3,0,0,1,0,0,0
+10,248,ShiMen WPP,878,-140,44,11,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-128-255
+1,249,251,21,4,0,0,22,0,0,0,-1--1--1,,1|(878,172)|
+1,250,251,224,100,0,0,22,0,0,0,-1--1--1,,1|(878,28)|
+11,251,2412,878,100,8,6,33,3,0,0,4,0,0,0
+10,252,ShiMen WPP Adjusted,931,100,45,19,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-128-255
+10,253,ShiMen WPP,962,48,53,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,254,253,252,0,0,0,0,0,64,0,-1--1--1,,1|(952,64)|
+10,255,Tap Water Loss Rate,1291,-269,73,15,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-192
+10,256,Tap Water Loss Rate,976,349,71,18,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,257,256,28,1,0,0,0,0,64,0,-1--1--1,,1|(1061,340)|
+1,258,256,21,1,0,0,0,0,64,0,-1--1--1,,1|(858,313)|
+10,259,Tap Water Loss Rate,-107,287,72,16,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,260,259,20,1,0,0,0,0,64,0,-1--1--1,,1|(12,317)|
+1,261,20,24,1,0,0,0,0,64,0,-1--1--1,,1|(336,374)|
+1,262,21,24,1,0,0,0,0,64,0,-1--1--1,,1|(595,371)|
+10,263,"Domestic-Industry Proportion",1292,52,59,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,264,"Domestic-Industry Proportion",461,511,64,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,265,264,22,1,0,0,0,0,64,0,-1--1--1,,1|(378,500)|
+1,266,264,23,1,0,0,0,0,64,0,-1--1--1,,1|(558,494)|
+12,267,48,-371,-16,10,8,0,3,0,0,-1,0,0,0
+1,268,270,10,4,0,0,22,0,0,0,-1--1--1,,3|(-245,-74)|(-181,-74)|(-136,-74)|
+1,269,270,267,100,0,0,22,0,0,0,-1--1--1,,1|(-307,-19)|
+11,270,48,-245,-19,8,6,33,3,0,0,4,0,0,0
+10,271,Taipei Water Department Source,-175,-19,62,19,40,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||0-0-255
+10,272,ZhongZhuang Support To BanXinWPP,416,-154,71,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||128-128-128
+10,273,ZhongZhuang Support To DaNanWPP,414,-96,71,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||128-128-128
+1,274,272,81,1,0,0,0,0,64,0,-1--1--1,,1|(306,-125)|
+1,275,273,77,0,0,0,0,0,64,0,-1--1--1,,1|(374,-73)|
+1,276,99,107,1,0,0,0,0,64,0,-1--1--1,,1|(100,-442)|
+1,277,95,107,1,0,0,0,0,64,0,-1--1--1,,1|(15,-411)|
+1,278,103,107,1,0,0,0,0,64,0,-1--1--1,,1|(188,-384)|
+1,279,107,193,1,0,0,0,0,64,0,-1--1--1,,1|(-113,-261)|
+10,280,ShiMen Reservoir Depth,-305,15,62,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,281,280,271,1,0,0,0,0,64,0,-1--1--1,,1|(-194,16)|
+1,282,52,56,0,0,0,0,0,64,0,-1--1--1,,1|(-115,-20)|
+1,283,271,56,0,0,0,0,0,64,0,-1--1--1,,1|(-129,7)|
+1,284,44,56,1,0,0,0,0,64,0,-1--1--1,,1|(-13,-72)|
+1,285,81,56,1,0,0,0,0,64,0,-1--1--1,,1|(-55,21)|
+1,286,60,56,0,0,0,0,0,64,0,-1--1--1,,1|(-49,103)|
+1,287,77,64,1,0,0,0,0,64,0,-1--1--1,,1|(213,27)|
+1,288,73,64,1,0,0,0,0,64,0,-1--1--1,,1|(219,64)|
+1,289,48,64,1,0,0,0,0,64,0,-1--1--1,,1|(126,-24)|
+12,290,48,461,-213,10,8,0,3,0,0,-1,0,0,0
+1,291,293,290,4,0,0,22,0,0,0,-1--1--1,,3|(372,-213)|(372,-213)|(412,-213)|
+1,292,293,19,100,0,0,22,0,0,0,-1--1--1,,1|(372,-265)|
+11,293,48,372,-239,8,6,33,3,0,0,4,0,0,0
+10,294,ZhongZhuangAdjustmentReservoir Transfer Loss Amount,445,-239,65,12,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||255-128-192
+1,295,272,294,1,0,0,0,0,64,0,-1--1--1,,1|(485,-197)|
+1,296,273,294,1,0,0,0,0,64,0,-1--1--1,,1|(520,-164)|
+12,297,48,-23,-259,10,8,0,3,0,0,-1,0,0,0
+1,298,300,297,4,0,0,22,0,0,0,-1--1--1,,1|(-23,-273)|
+1,299,300,8,100,0,0,22,0,0,0,-1--1--1,,1|(-23,-297)|
+11,300,48,-23,-285,8,6,33,3,0,0,4,0,0,0
+10,301,YuanShanWeir Transfer Loss Amount,33,-285,48,12,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||255-128-192
+1,302,44,301,0,0,0,0,0,64,0,-1--1--1,,1|(16,-231)|
+1,303,48,301,0,0,0,0,0,64,0,-1--1--1,,1|(93,-218)|
+12,304,48,-104,-741,10,8,0,3,0,0,-1,0,0,0
+1,305,307,304,4,0,0,22,0,0,0,-1--1--1,,1|(-53,-741)|
+1,306,307,1,100,0,0,22,0,0,0,-1--1--1,,1|(42,-741)|
+11,307,48,-6,-741,6,8,34,3,0,0,1,0,0,0
+10,308,ShiMen Reservoir Evaporation,-6,-714,58,19,40,3,0,0,-1,0,0,0
+10,309,ShiMenReseverior Month Evaporation Table,-99,-778,56,22,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+10,310,ShiMen Reservoir Area,20,-782,46,15,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+1,311,309,308,0,0,0,0,0,64,0,-1--1--1,,1|(-56,-748)|
+1,312,310,308,0,0,0,0,0,64,0,-1--1--1,,1|(11,-756)|
+1,313,308,214,0,0,0,0,0,64,0,-1--1--1,,1|(88,-652)|
+1,314,301,193,0,0,0,0,0,64,0,-1--1--1,,1|(-37,-258)|
+10,315,TargetYear DomesticWaterDemand,1492,29,77,19,8,3,0,0,0,0,0,0
+10,316,TargetYear IndustryWaterDemand,1490,85,73,19,8,3,0,0,0,0,0,0
+1,317,315,263,0,0,0,0,0,64,0,-1--1--1,,1|(1389,40)|
+1,318,316,263,0,0,0,0,0,64,0,-1--1--1,,1|(1390,68)|
+1,319,214,99,1,0,0,0,0,64,0,-1--1--1,,1|(212,-519)|
+1,320,107,48,1,0,0,0,0,64,0,-1--1--1,,1|(102,-244)|
+1,321,48,44,0,0,0,0,0,64,0,-1--1--1,,1|(84,-169)|
+1,322,107,44,1,0,0,0,0,64,0,-1--1--1,,1|(10,-275)|
+1,323,325,7,4,0,0,22,0,0,0,-1--1--1,,1|(145,-615)|
+1,324,325,1,100,0,0,22,0,0,0,-1--1--1,,1|(145,-694)|
+11,325,1100,145,-672,8,6,33,3,0,0,4,0,0,0
+10,326,Support EcoBaseFlow,226,-672,73,17,40,131,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||255-0-0
+10,327,Support For DaHan River Ecological Base Stream Flow,545,-688,89,19,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+1,328,327,326,1,0,0,0,0,64,0,-1--1--1,,1|(385,-679)|
+1,329,40,214,0,0,0,0,0,64,0,-1--1--1,,1|(245,-652)|
+10,330,WPP Transfer Loss Rate,28,-506,58,7,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,331,330,7,0,0,0,0,0,64,0,-1--1--1,,1|(72,-515)|
+10,332,WPP Transfer Loss Rate,678,-187,58,7,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,333,332,139,0,0,0,0,0,64,0,-1--1--1,,1|(719,-240)|
+1,334,332,223,1,0,0,0,0,64,0,-1--1--1,,1|(745,-179)|
+1,335,332,135,1,0,0,0,0,64,0,-1--1--1,,1|(743,-217)|
+1,336,332,248,0,0,0,0,0,64,0,-1--1--1,,1|(763,-168)|
+10,337,WPP Transfer Loss Rate,888,-642,66,18,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,338,WPP Transfer Loss Rate,330,49,58,7,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,339,338,73,1,0,0,0,0,64,0,-1--1--1,,1|(374,15)|
+1,340,338,234,1,0,0,0,0,64,0,-1--1--1,,1|(406,79)|
+1,341,338,81,1,0,0,0,0,64,0,-1--1--1,,1|(248,11)|
+1,342,338,77,1,0,0,0,0,64,0,-1--1--1,,1|(306,12)|
+10,343,WPP Transfer Loss Rate,31,-110,58,7,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,344,343,44,0,0,0,0,0,64,0,-1--1--1,,1|(21,-139)|
+1,345,343,301,1,0,0,0,0,64,0,-1--1--1,,1|(56,-191)|
+1,346,343,48,0,0,0,0,0,64,0,-1--1--1,,1|(71,-126)|
+10,347,WPP Transfer Loss Rate,-345,-279,51,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,348,347,188,0,0,0,0,0,64,0,-1--1--1,,1|(-292,-352)|
+1,349,347,202,1,0,0,0,0,64,0,-1--1--1,,1|(-273,-268)|
+1,350,347,52,0,0,0,0,0,64,0,-1--1--1,,1|(-260,-188)|
+1,351,259,27,1,0,0,0,0,64,0,-1--1--1,,1|(-175,200)|
+10,352,Channel Transfer Loss Rate,280,-452,40,12,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,353,352,90,0,0,0,0,0,64,0,-1--1--1,,1|(228,-446)|
+1,354,352,103,0,0,0,0,0,64,0,-1--1--1,,1|(291,-430)|
+10,355,WPP Transfer Loss Rate,395,-189,58,7,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,356,355,294,0,0,0,0,0,64,0,-1--1--1,,1|(413,-207)|
+10,357,TaoYuanDaHanRiver AgriWater Demand,169,-305,45,18,3,131,0,9,0,0,0,0,64-160-98,0-0-0,|8||0-0-0
+12,358,48,171,-210,10,8,0,3,0,0,-1,0,0,0
+1,359,361,358,4,0,0,22,0,0,0,-1--1--1,,1|(170,-240)|
+1,360,361,357,100,0,0,22,0,0,0,-1--1--1,,1|(170,-280)|
+11,361,48,170,-267,8,6,33,3,0,0,4,0,0,0
+10,362,Irrigation Tranfer Loss Amount,214,-267,36,12,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|8||255-128-192
+1,363,365,357,4,0,0,22,0,0,0,-1--1--1,,1|(168,-337)|
+1,364,365,90,100,0,0,22,0,0,0,-1--1--1,,1|(168,-388)|
+11,365,1516,168,-356,8,6,33,3,0,0,4,0,0,0
+10,366,Transfer From ZhongZhuangWeir To TaoYuanDaHanRiver AgriWater Demand,224,-356,48,24,40,3,0,8,-1,0,0,0,-1--1--1,0-0-0,|8||0-0-0
+1,367,352,366,1,0,0,0,0,64,0,-1--1--1,,1|(244,-404)|
+1,368,352,107,1,0,0,0,0,64,0,-1--1--1,,1|(190,-399)|
+10,369,Transfer From ShiMenReservoir To ShiMenAgriChannel,1008,-381,69,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,370,Ratio NCSIST At ShiMenAgriChannel,932,-482,47,12,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,371,370,152,1,0,0,0,0,64,0,-1--1--1,,1|(796,-463)|
+1,372,369,152,0,0,0,0,0,64,0,-1--1--1,,1|(862,-419)|
+10,373,Ratio WPP ShiMenReservoir To ShiMenAgriChannel,1010,-329,62,22,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+10,374,Ratio AgriWater ShiMenReservoir To ShiMenAgriChannel,1004,-437,62,22,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+1,375,369,139,0,0,0,0,0,64,0,-1--1--1,,1|(880,-342)|
+1,376,369,135,0,0,0,0,0,64,0,-1--1--1,,1|(919,-299)|
+1,377,369,248,0,0,0,0,0,64,0,-1--1--1,,1|(941,-259)|
+1,378,369,89,0,0,0,0,0,64,0,-1--1--1,,1|(972,-460)|
+1,379,374,89,0,0,0,0,0,64,0,-1--1--1,,1|(973,-486)|
+1,380,373,139,0,0,0,0,0,64,0,-1--1--1,,1|(891,-320)|
+1,381,373,135,0,0,0,0,0,64,0,-1--1--1,,1|(922,-275)|
+1,382,373,248,0,0,0,0,0,64,0,-1--1--1,,1|(944,-235)|
+10,383,Ratio LongTanWPP At ShiMenAgriChannel,1009,-280,71,15,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+10,384,Ratio PingZhenWPP1 At ShiMenAgriChannel,1008,-238,71,15,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+10,385,Ratio ShiMenWPP At ShiMenAgriChannel,1010,-198,66,15,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+1,386,383,139,0,0,0,0,0,64,0,-1--1--1,,1|(886,-295)|
+1,387,384,135,0,0,0,0,0,64,0,-1--1--1,,1|(919,-229)|
+1,388,385,248,0,0,0,0,0,64,0,-1--1--1,,1|(945,-170)|
+1,389,337,174,1,0,0,0,0,64,0,-1--1--1,,1|(967,-567)|
+1,390,369,174,1,0,0,0,0,64,0,-1--1--1,,1|(1097,-459)|
+1,391,374,174,1,0,0,0,0,64,0,-1--1--1,,1|(1078,-459)|
+1,392,373,174,1,0,0,0,0,64,0,-1--1--1,,1|(1106,-426)|
+1,393,370,174,0,0,0,0,0,64,0,-1--1--1,,1|(971,-495)|
+10,394,Ratio NCSIST At HouChiWeir,596,-443,43,12,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+10,395,Ratio TaoYuan CPC Refinery At HouChiWeir,615,-320,57,12,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+10,396,Ratio WPP ShiMenReservoir To HouChiWeir,690,-129,77,14,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+10,397,Ratio PingZhenWPP2 At HouChiWeir,687,-104,87,16,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,398,396,223,1,0,0,0,0,64,0,-1--1--1,,1|(769,-124)|
+1,399,397,223,1,0,0,0,0,64,0,-1--1--1,,1|(775,-106)|
+10,400,Transfer From ShiMenReservoir To HouChiWeir,686,-53,76,17,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,401,400,223,1,0,0,0,0,64,0,-1--1--1,,1|(785,-75)|
+10,402,Ratio DaNanWPP2 At HouChiWeir,688,-81,88,9,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,403,396,73,1,0,0,0,0,64,0,-1--1--1,,1|(558,-82)|
+1,404,400,73,1,0,0,0,0,64,0,-1--1--1,,1|(592,-53)|
+1,405,402,73,1,0,0,0,0,64,0,-1--1--1,,1|(560,-48)|
+10,406,Transfer From ShiMenReservoir To HouChiWeir,617,-350,71,16,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,407,394,157,1,0,0,0,0,64,0,-1--1--1,,1|(547,-419)|
+1,408,395,162,1,0,0,0,0,64,0,-1--1--1,,1|(553,-305)|
+1,409,406,157,0,0,0,0,0,64,0,-1--1--1,,1|(615,-364)|
+1,410,406,162,1,0,0,0,0,64,0,-1--1--1,,1|(688,-318)|
+1,411,400,85,1,0,0,0,0,64,0,-1--1--1,,1|(665,27)|
+10,412,Ratio DaNanWPP2 At HouChiWeir,478,-465,45,12,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+10,413,Ratio WPP ShiMenReservoir To HouChiWeir,478,-401,45,18,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,414,412,36,0,0,0,0,0,64,0,-1--1--1,,1|(410,-473)|
+1,415,413,36,0,0,0,0,0,64,0,-1--1--1,,1|(409,-440)|
+10,416,PingZhen WPP2,34,-490,43,7,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,417,330,99,0,0,0,0,0,64,0,-1--1--1,,1|(111,-493)|
+1,418,416,99,0,0,0,0,0,64,0,-1--1--1,,1|(113,-485)|
+1,419,36,99,0,0,0,0,0,64,0,-1--1--1,,1|(268,-482)|
+1,420,32,99,1,0,0,0,0,64,0,-1--1--1,,1|(258,-554)|
+1,421,326,99,1,0,0,0,0,64,0,-1--1--1,,1|(285,-572)|
+10,422,Ratio AgriWater ShiMenReservoir To HouChiWeir In TaoYuanAgriChannel,474,-313,50,24,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,423,422,36,0,0,0,0,0,64,0,-1--1--1,,1|(403,-397)|
+10,424,Ratio AgriWater ShiMenReservoir To HouChiWeir In DaHanRiver,367,-314,51,26,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,425,424,366,1,0,0,0,0,64,0,-1--1--1,,1|(259,-312)|
+1,426,366,362,1,0,0,0,0,64,0,-1--1--1,,1|(257,-291)|
+10,427,TaoYuan AgriChannel Irrigation Transfer Loss Rate,238,-209,52,18,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,428,427,362,0,0,0,0,0,64,0,-1--1--1,,1|(228,-235)|
+10,429,Ratio ZhongZhuangAdjustmentReservoir take,1296,242,87,35,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-0-255
+10,430,Ratio ZhongZhuangAdjustmentReservoir take,365,-357,58,18,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,431,430,103,1,0,0,0,0,64,0,-1--1--1,,1|(360,-402)|
+1,432,95,103,0,0,0,0,0,64,0,-1--1--1,,1|(131,-411)|
+1,433,99,103,0,0,0,0,0,64,0,-1--1--1,,1|(252,-439)|
+1,434,366,103,1,0,0,0,0,64,0,-1--1--1,,1|(284,-350)|
+1,435,366,107,0,0,0,0,0,64,0,-1--1--1,,1|(150,-356)|
+12,436,48,-135,-148,10,8,0,3,0,0,-1,0,0,0
+1,437,439,436,4,0,0,22,0,0,0,-1--1--1,,3|(-135,-224)|(-135,-224)|(-135,-190)|
+1,438,439,8,100,0,0,22,0,0,0,-1--1--1,,1|(-135,-321)|
+11,439,48,-135,-292,8,6,33,3,0,0,4,0,0,0
+10,440,EcoBaseFlow,-89,-292,38,9,40,3,0,10,-1,0,0,0,-1--1--1,0-0-0,|10||0-128-0
+1,441,440,193,0,0,0,0,0,64,0,-1--1--1,,1|(-96,-268)|
+1,442,107,440,1,0,0,0,0,64,0,-1--1--1,,1|(-21,-298)|
+1,443,440,44,0,0,0,0,0,64,0,-1--1--1,,1|(-51,-248)|
+1,444,440,48,0,0,0,0,0,64,0,-1--1--1,,1|(16,-232)|
+10,445,Ratio BanXinWPP Allocation At YuanShanWeir,9,-138,66,15,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+10,446,Ratio DaNanWPP1 Allocation At YuanShanWei,175,-116,79,15,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,447,446,48,1,0,0,0,0,64,0,-1--1--1,,1|(188,-122)|
+1,448,445,48,0,0,0,0,0,64,0,-1--1--1,,1|(84,-147)|
+10,449,Allocation BanXin WPP,224,-178,59,7,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,450,449,48,1,0,0,0,0,64,0,-1--1--1,,1|(163,-168)|
+10,451,Transfer From TaoYuanAgriChannel To NCSIST,706,112,45,15,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|6||128-128-128
+10,452,Transfer From TaoYuanAgriChannel To TaoYuanCPCRefinery,708,142,45,15,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|6||128-128-128
+10,453,Transfer From TaoYuanAgriChannel To DaNanWPP,697,169,45,15,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|6||128-128-128
+1,454,85,234,1,0,0,0,0,64,0,-1--1--1,,1|(607,100)|
+1,455,451,234,0,0,0,0,0,64,0,-1--1--1,,1|(642,112)|
+1,456,452,234,0,0,0,0,0,64,0,-1--1--1,,1|(643,131)|
+1,457,453,234,0,0,0,0,0,64,0,-1--1--1,,1|(631,146)|
+10,458,Final Allocation ShiMenReservoir To ShiMenAgriChannel,315,-787,62,22,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+10,459,Final Allocation ShiMenReservoir To HouChiWeir,556,-638,59,22,8,130,0,11,-1,0,0,0,128-128-128,0-0-0,|10||128-128-128
+1,460,458,40,0,0,0,0,0,64,0,-1--1--1,,1|(316,-754)|
+1,461,459,32,0,0,0,0,0,64,0,-1--1--1,,1|(421,-635)|
+1,462,32,36,1,1,0,0,0,64,0,-1--1--1,,1|(321,-571)|
+1,463,32,366,1,1,0,0,0,64,0,-1--1--1,,1|(222,-503)|
+10,464,YuanShan Weir Ecological Base Stream Flow,-111,-365,50,18,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,465,464,440,1,0,0,0,0,64,0,-1--1--1,,1|(-135,-328)|
+1,466,394,36,1,0,0,0,0,64,0,-1--1--1,,1|(463,-443)|
+1,467,395,36,1,0,0,0,0,64,0,-1--1--1,,1|(460,-379)|
+10,468,Ratio AgriWater ShiMenReservoir To HouChiWeir In TaoYuanAgriChannel,709,-9,50,24,8,2,0,11,-1,0,0,0,128-128-128,0-0-0,|8||128-128-128
+1,469,468,85,1,0,0,0,0,64,0,-1--1--1,,1|(668,60)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Allocation Rule
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,90,0
+10,1,Allocation LongTan WPP,332,-90,48,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-0-128
+10,2,Allocation PingZhen WPP1,335,-21,54,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-0-128
+10,3,Allocation ShiMen WPP,343,43,59,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-0-128
+10,4,Allocation DaNan WPP1,362,356,58,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-0-128
+10,5,Allocation BanXin WPP,370,294,58,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-0-128
+10,6,ShiMenReservoir Operation Rule Lower Limit,16,186,55,29,3,131,0,1,0,0,0,0,255-0-0,0-0-0,|12||0-0-0
+10,7,ShiMenReservoir Operation Rule Lower Severe Limit,13,264,64,30,3,131,0,1,0,0,0,0,255-0-0,0-0-0,|12||0-0-0
+10,8,Date,-273,128,51,19,8,3,0,0,0,0,0,0
+1,9,8,6,0,0,0,0,0,64,0,-1--1--1,,1|(-137,154)|
+1,10,8,7,1,0,0,0,0,64,0,-1--1--1,,1|(-172,197)|
+10,11,Allocation ShiMen AgriChannel AgriWater,345,100,75,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||128-192-0
+10,12,Allocation TaoYuan AgriChannel AgriWater,367,548,75,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||128-192-0
+1,13,6,1,0,0,0,0,0,64,0,-1--1--1,,1|(174,47)|
+1,14,6,2,0,0,0,0,0,64,0,-1--1--1,,1|(176,81)|
+1,15,6,3,0,0,0,0,0,64,0,-1--1--1,,1|(178,114)|
+1,16,6,11,0,0,0,0,0,64,0,-1--1--1,,1|(164,147)|
+1,17,6,4,0,0,0,0,0,64,0,-1--1--1,,1|(190,271)|
+1,18,6,5,0,0,0,0,0,64,0,-1--1--1,,1|(184,236)|
+1,19,6,12,0,0,0,0,0,64,0,-1--1--1,,1|(191,366)|
+1,20,7,12,0,0,0,0,0,64,0,-1--1--1,,1|(191,407)|
+1,21,7,5,0,0,0,0,0,64,0,-1--1--1,,1|(187,278)|
+1,22,7,4,0,0,0,0,0,64,0,-1--1--1,,1|(183,308)|
+1,23,7,11,0,0,0,0,0,64,0,-1--1--1,,1|(183,179)|
+1,24,7,3,0,0,0,0,0,64,0,-1--1--1,,1|(179,152)|
+1,25,7,2,0,0,0,0,0,64,0,-1--1--1,,1|(174,120)|
+1,26,7,1,0,0,0,0,0,64,0,-1--1--1,,1|(172,86)|
+10,27,ShiMen Reservoir Depth,15,341,59,24,3,131,0,1,0,0,0,0,255-0-0,0-0-0,|12||0-0-0
+1,28,27,1,0,0,0,0,0,64,0,-1--1--1,,1|(170,128)|
+1,29,27,2,0,0,0,0,0,64,0,-1--1--1,,1|(172,162)|
+1,30,27,3,0,0,0,0,0,64,0,-1--1--1,,1|(176,194)|
+1,31,27,11,0,0,0,0,0,64,0,-1--1--1,,1|(176,222)|
+1,32,27,4,0,0,0,0,0,64,0,-1--1--1,,1|(182,347)|
+1,33,27,5,0,0,0,0,0,64,0,-1--1--1,,1|(186,318)|
+1,34,27,12,0,0,0,0,0,64,0,-1--1--1,,1|(188,443)|
+10,35,Final Allocation ShiMenReservoir To ShiMenAgriChannel,971,15,75,42,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||0-0-0
+10,36,Final Allocation ShiMenReservoir To HouChiWeir,971,211,73,43,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||0-0-0
+10,37,ShiMen Reservoir,-283,466,75,34,3,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,38,37,27,0,0,0,0,0,64,0,-1--1--1,,1|(-131,402)|
+10,39,Support For DaHan River Ecological Base Stream Flow,-122,786,94,30,3,131,0,7,0,0,0,0,0-192-255,255-255-255,|12||0-128-0
+10,40,Allocation PingZhen WPP2,361,230,54,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-0-128
+1,41,6,40,0,0,0,0,0,64,0,-1--1--1,,1|(181,207)|
+1,42,7,40,0,0,0,0,0,64,0,-1--1--1,,1|(185,247)|
+1,43,27,40,0,0,0,0,0,64,0,-1--1--1,,1|(183,287)|
+10,44,Water Right PingZhen WPP1,103,-34,64,19,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,45,44,2,1,0,0,0,0,64,0,-1--1--1,,1|(215,-38)|
+10,46,Allocation NCSIST,363,169,33,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+10,47,Allocation TaoYuan CPC Refinery,353,621,64,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-128-0
+1,48,6,46,0,0,0,0,0,64,0,-1--1--1,,1|(193,177)|
+1,49,7,46,0,0,0,0,0,64,0,-1--1--1,,1|(196,213)|
+1,50,6,47,0,0,0,0,0,64,0,-1--1--1,,1|(183,402)|
+1,51,7,47,0,0,0,0,0,64,0,-1--1--1,,1|(182,442)|
+10,52,Water Right ShiMen AgriChannel AgriWater,116,29,76,22,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,53,52,11,0,0,0,0,0,64,0,-1--1--1,,1|(227,63)|
+10,54,Water Right TaoYuan AgriChannel AgriWater,129,753,85,19,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,55,54,12,0,0,0,0,0,64,0,-1--1--1,,1|(242,655)|
+10,56,Allocation DaNan WPP2,368,411,58,19,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||0-0-128
+10,57,Water Right DaNan WPP2,134,627,56,18,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,58,57,56,0,0,0,0,0,64,0,-1--1--1,,1|(244,524)|
+10,59,Water Right BanXin WPP,128,514,51,19,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,60,59,5,0,0,0,0,0,64,0,-1--1--1,,1|(243,408)|
+10,61,Water Right TaoYuan CPC Refinery,124,807,74,21,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,62,61,47,0,0,0,0,0,64,0,-1--1--1,,1|(233,717)|
+10,63,Sum Allocation HouChiWeir To ZhongZhuangWeir,970,478,85,44,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||0-0-0
+10,64,Sum Allocation HouChiWeir To TaoYuanAgriChannel,971,671,84,47,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||0-0-0
+10,65,ShiMenReservoir Operation Rule Upper Limit,19,92,56,29,3,131,0,1,0,0,0,0,255-0-0,0-0-0,|12||0-0-0
+1,66,8,65,0,0,0,0,0,64,0,-1--1--1,,1|(-136,110)|
+1,67,27,46,0,0,0,0,0,64,0,-1--1--1,,1|(190,254)|
+1,68,6,56,0,0,0,0,0,64,0,-1--1--1,,1|(193,299)|
+1,69,7,56,0,0,0,0,0,64,0,-1--1--1,,1|(193,338)|
+1,70,27,56,0,0,0,0,0,64,0,-1--1--1,,1|(185,374)|
+1,71,27,47,0,0,0,0,0,64,0,-1--1--1,,1|(181,479)|
+10,72,ShiMen Reservoir Area,-36,547,65,24,3,131,0,1,0,0,0,0,255-0-0,0-0-0,|12||0-0-0
+10,73,ShiMenReseverior Month Evaporation Table,6,412,66,25,3,131,0,1,0,0,0,0,255-0-0,0-0-0,|12||0-0-0
+1,74,37,72,0,0,0,0,0,64,0,-1--1--1,,1|(-160,505)|
+10,75,YuanShan Lateral Flow,-378,733,46,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,76,75,39,0,0,0,0,0,64,0,-1--1--1,,1|(-280,752)|
+10,77,Water Right ShiMenLongTan WPP,124,-94,68,29,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,78,77,1,0,0,0,0,0,64,0,-1--1--1,,1|(231,-91)|
+1,79,77,3,0,0,0,0,0,64,0,-1--1--1,,1|(235,-24)|
+10,80,Water Right DaNan WPP1,136,574,54,19,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,81,80,4,0,0,0,0,0,64,0,-1--1--1,,1|(243,469)|
+10,82,Water Right PingZhen WPP2,136,460,55,22,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,83,82,40,0,0,0,0,0,64,0,-1--1--1,,1|(244,348)|
+10,84,Sum AgriWater ShiMenReservoir To ShiMenAgriChannel,635,6,75,42,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||0-0-0
+1,85,84,35,0,0,0,0,0,64,0,-1--1--1,,1|(796,9)|
+10,86,Sum WPP ShiMenReservoir To HouChiWeir,663,232,71,28,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||255-0-0
+10,87,Sum AgriWater ShiMenReservoir To HouChiWeir,680,335,68,32,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||0-0-0
+1,88,87,36,0,0,0,0,0,64,0,-1--1--1,,1|(816,277)|
+1,89,86,36,0,0,0,0,0,64,0,-1--1--1,,1|(809,222)|
+10,90,Sum WPP HouChiWeir To ZhongZhuangWeir,678,421,90,26,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||255-0-0
+1,91,90,63,0,0,0,0,0,64,0,-1--1--1,,1|(819,448)|
+10,92,Sum AgriWater HouChiWeir To TaoYuanAgriChannel,556,710,90,32,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||0-0-0
+1,93,92,64,0,0,0,0,0,64,0,-1--1--1,,1|(759,690)|
+1,94,8,73,1,0,0,0,0,64,0,-1--1--1,,1|(-198,349)|
+10,95,Allocation TaoYuanDaHanRiver AgriWater,366,477,83,29,8,131,0,2,0,0,0,0,-1--1--1,0-0-0,|12||128-192-0
+1,96,6,95,0,0,0,0,0,64,0,-1--1--1,,1|(185,327)|
+1,97,7,95,0,0,0,0,0,64,0,-1--1--1,,1|(183,367)|
+1,98,27,95,0,0,0,0,0,64,0,-1--1--1,,1|(175,402)|
+10,99,Water Right TaoYuanDaHanRiver AgriWater,129,686,105,27,3,131,0,1,0,0,0,0,128-0-64,0-0-0,|12||128-0-64
+1,100,99,95,0,0,0,0,0,64,0,-1--1--1,,1|(240,587)|
+1,101,37,39,0,0,0,0,0,64,0,-1--1--1,,1|(-204,621)|
+10,102,Sum WPP ShiMenReservoir To ShiMenAgriChannel,631,-98,75,42,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||255-0-0
+1,103,1,102,0,0,0,0,0,64,0,-1--1--1,,1|(461,-92)|
+1,104,2,102,0,0,0,0,0,64,0,-1--1--1,,1|(465,-54)|
+1,105,3,102,0,0,0,0,0,64,0,-1--1--1,,1|(462,-15)|
+1,106,11,84,0,0,0,0,0,64,0,-1--1--1,,1|(474,57)|
+1,107,46,36,0,1,0,0,0,64,0,-1--1--1,,1|(640,187)|
+1,108,40,86,0,0,0,0,0,64,0,-1--1--1,,1|(496,230)|
+1,109,5,86,0,0,0,0,0,64,0,-1--1--1,,1|(503,265)|
+1,110,4,86,0,0,0,0,0,64,0,-1--1--1,,1|(495,301)|
+1,111,56,86,0,0,0,0,0,64,0,-1--1--1,,1|(501,329)|
+10,112,Allocation TaoYuan CPC Refinery,663,137,69,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||255-128-0
+1,113,112,36,0,0,0,0,0,64,0,-1--1--1,,1|(808,171)|
+1,114,102,35,0,0,0,0,0,64,0,-1--1--1,,1|(794,-43)|
+1,115,12,87,0,0,0,0,0,64,0,-1--1--1,,1|(507,451)|
+1,116,95,87,0,0,0,0,0,64,0,-1--1--1,,1|(514,409)|
+1,117,46,35,0,1,0,0,0,64,0,-1--1--1,,1|(639,98)|
+1,118,5,90,0,0,0,0,0,64,0,-1--1--1,,1|(508,351)|
+1,119,4,90,0,0,0,0,0,64,0,-1--1--1,,1|(497,383)|
+1,120,47,64,0,1,0,0,0,64,0,-1--1--1,,1|(645,644)|
+1,121,12,92,0,0,0,0,0,64,0,-1--1--1,,1|(448,617)|
+10,122,Sum WPP HouChiWeir To TaoYuanAgriChannel,599,582,90,32,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||0-0-0
+1,123,56,122,0,0,0,0,0,64,0,-1--1--1,,1|(468,485)|
+1,124,122,64,0,0,0,0,0,64,0,-1--1--1,,1|(781,624)|
+10,125,Allocation NCSIST,569,785,37,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||255-128-0
+1,126,125,64,0,0,0,0,0,64,0,-1--1--1,,1|(739,736)|
+10,127,ShiMen Reservoir,1159,39,55,34,3,130,0,3,-1,0,0,0,128-128-128,0-0-0,|22||128-128-128
+1,128,127,35,0,0,0,0,0,64,0,-1--1--1,,1|(1081,28)|
+1,129,127,36,0,0,0,0,0,64,0,-1--1--1,,1|(1075,115)|
+10,130,Ratio ShiMenReservoir To HouChiWeir,974,323,83,26,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,131,Ratio ShiMenReservoir To ShiMenAgriChannel,967,100,88,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,132,131,35,0,0,0,0,0,64,0,-1--1--1,,1|(968,71)|
+1,133,130,36,0,0,0,0,0,64,0,-1--1--1,,1|(973,282)|
+10,134,Support For DaHan River Ecological Base Stream Flow,1184,170,77,36,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,135,134,35,0,0,0,0,0,64,0,-1--1--1,,1|(1087,99)|
+1,136,134,36,0,0,0,0,0,64,0,-1--1--1,,1|(1082,188)|
+10,137,Sum AgriWater HouChiWeir To ZhongZhuangWeir,675,496,90,26,3,131,0,1,0,0,0,0,0-192-255,0-0-0,|12||255-0-0
+1,138,95,137,0,0,0,0,0,64,0,-1--1--1,,1|(509,485)|
+1,139,137,63,0,0,0,0,0,64,0,-1--1--1,,1|(818,487)|
+10,140,YuanShan Weir Ecological Base Stream Flow,-395,829,90,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,141,140,39,0,0,0,0,0,64,0,-1--1--1,,1|(-267,808)|
+10,142,Operation Rule Record Agriculture,-168,247,50,26,8,131,0,0,0,0,0,0
+10,143,Operation Rule Record Industry,-164,327,52,19,8,3,0,0,0,0,0,0
+1,144,6,142,0,0,0,0,0,64,0,-1--1--1,,1|(-71,214)|
+1,145,7,142,0,0,0,0,0,64,0,-1--1--1,,1|(-77,255)|
+1,146,27,142,0,0,0,0,0,64,0,-1--1--1,,1|(-67,298)|
+1,147,6,143,0,0,0,0,0,64,0,-1--1--1,,1|(-74,257)|
+1,148,7,143,0,0,0,0,0,64,0,-1--1--1,,1|(-74,294)|
+1,149,27,143,0,0,0,0,0,64,0,-1--1--1,,1|(-71,334)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*WPP Allocation Proportion
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,70,0
+10,1,Total Allocation Proportion At ShiMenAgriChannel,279,260,94,35,8,131,0,0,0,0,0,0
+10,2,Total Allocation Proportion At HouChiWeir,279,360,86,38,8,131,0,0,0,0,0,0
+10,3,Allocation Proportion of LongTanWPP,545,196,69,19,8,3,0,0,0,0,0,0
+10,4,Allocation Proportion of PingZhenWPP1,556,258,69,19,8,3,0,0,0,0,0,0
+10,5,Allocation Proportion of PingZhenWPP2,556,432,69,19,8,3,0,0,0,0,0,0
+10,6,Allocation Proportion of ShiMenWPP,551,317,69,19,8,3,0,0,0,0,0,0
+10,7,Allocation Proportion of BanXinWPP,552,485,69,19,8,3,0,0,0,0,0,0
+10,8,Allocation Proportion of DaNanWPP1,550,545,69,19,8,3,0,0,0,0,0,0
+10,9,Allocation Proportion of DaNanWPP2,550,596,69,19,8,3,0,0,0,0,0,0
+10,10,Allocation BanXin WPP,1029,477,55,21,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,11,Allocation DaNan WPP1,1033,537,56,25,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,12,Allocation DaNan WPP2,1035,593,62,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,13,Allocation LongTan WPP,1021,197,53,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,14,Allocation PingZhen WPP1,1031,259,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,15,Allocation PingZhen WPP2,1029,423,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,16,Allocation ShiMen WPP,1025,318,49,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,17,Proportion Checking Variable,70,296,47,47,2,131,0,0,0,0,0,0
+1,18,1,17,0,0,0,0,0,64,0,-1--1--1,,1|(157,280)|
+1,19,2,17,0,0,0,0,0,64,0,-1--1--1,,1|(160,323)|
+10,20,Total Allocation Proportion At ZhongZhuangWeir,279,516,87,33,8,131,0,0,0,0,0,0
+10,21,Total WPP Allocation,569,85,112,41,3,131,0,9,0,0,0,0,0-128-255,0-0-0,|14||0-0-0
+1,22,13,21,0,0,0,0,0,64,0,-1--1--1,,1|(831,149)|
+1,23,14,21,0,0,0,0,0,64,0,-1--1--1,,1|(835,185)|
+1,24,16,21,0,0,0,0,0,64,0,-1--1--1,,1|(824,215)|
+1,25,15,21,0,0,0,0,0,64,0,-1--1--1,,1|(819,269)|
+1,26,10,21,0,0,0,0,0,64,0,-1--1--1,,1|(816,295)|
+1,27,11,21,0,0,0,0,0,64,0,-1--1--1,,1|(814,323)|
+1,28,12,21,0,0,0,0,0,64,0,-1--1--1,,1|(816,355)|
+1,29,21,3,1,0,0,0,0,64,0,-1--1--1,,1|(626,183)|
+1,30,21,4,1,0,0,0,0,64,0,-1--1--1,,1|(663,217)|
+1,31,21,6,1,0,0,0,0,64,0,-1--1--1,,1|(684,255)|
+1,32,21,5,1,0,0,0,0,64,0,-1--1--1,,1|(714,292)|
+1,33,21,7,1,0,0,0,0,64,0,-1--1--1,,1|(744,322)|
+1,34,21,8,1,0,0,0,0,64,0,-1--1--1,,1|(768,434)|
+1,35,21,9,1,0,0,0,0,64,0,-1--1--1,,1|(788,479)|
+1,36,13,3,0,0,0,0,0,64,0,-1--1--1,,1|(797,196)|
+1,37,14,4,0,0,0,0,0,64,0,-1--1--1,,1|(805,258)|
+1,38,16,6,0,0,0,0,0,64,0,-1--1--1,,1|(804,317)|
+1,39,15,5,0,0,0,0,0,64,0,-1--1--1,,1|(804,426)|
+1,40,10,7,0,0,0,0,0,64,0,-1--1--1,,1|(804,479)|
+1,41,11,8,0,0,0,0,0,64,0,-1--1--1,,1|(804,539)|
+1,42,12,9,0,0,0,0,0,64,0,-1--1--1,,1|(803,593)|
+1,43,3,1,0,0,0,0,0,64,0,-1--1--1,,1|(431,222)|
+1,44,4,1,0,0,0,0,0,64,0,-1--1--1,,1|(436,258)|
+1,45,6,1,0,0,0,0,0,64,0,-1--1--1,,1|(434,292)|
+1,46,5,2,0,0,0,0,0,64,0,-1--1--1,,1|(432,400)|
+1,47,7,2,0,0,0,0,0,64,0,-1--1--1,,1|(442,434)|
+1,48,8,2,0,0,0,0,0,64,0,-1--1--1,,1|(434,465)|
+1,49,9,2,0,0,0,0,0,64,0,-1--1--1,,1|(430,492)|
+1,50,7,20,0,0,0,0,0,64,0,-1--1--1,,1|(431,498)|
+1,51,8,20,0,0,0,0,0,64,0,-1--1--1,,1|(430,532)|
+10,52,Total WPP Allocation At ShiMenAgriChannel,1333,92,118,45,3,131,0,1,0,0,0,0,0-128-255,0-0-0,|12||0-0-0
+1,53,13,52,0,0,0,0,0,64,0,-1--1--1,,1|(1137,157)|
+1,54,14,52,0,0,0,0,0,64,0,-1--1--1,,1|(1151,191)|
+1,55,16,52,0,0,0,0,0,64,0,-1--1--1,,1|(1154,222)|
+10,56,Ratio LongTanWPP At ShiMenAgriChannel,1311,203,75,19,8,3,0,0,0,0,0,0
+10,57,Ratio PingZhenWPP1 At ShiMenAgriChannel,1312,257,80,19,8,3,0,0,0,0,0,0
+10,58,Ratio ShiMenWPP At ShiMenAgriChannel,1317,322,71,19,8,3,0,0,0,0,0,0
+1,59,13,56,0,0,0,0,0,64,0,-1--1--1,,1|(1148,199)|
+1,60,14,57,0,0,0,0,0,64,0,-1--1--1,,1|(1153,258)|
+1,61,16,58,0,0,0,0,0,64,0,-1--1--1,,1|(1153,319)|
+1,62,52,56,1,0,0,0,0,64,0,-1--1--1,,1|(1408,163)|
+1,63,52,57,1,0,0,0,0,64,0,-1--1--1,,1|(1437,188)|
+1,64,52,58,1,0,0,0,0,64,0,-1--1--1,,1|(1466,269)|
+10,65,Total WPP Allocation At HouChiWeir,1318,697,118,45,3,131,0,1,0,0,0,0,0-128-255,0-0-0,|12||0-0-0
+10,66,Ratio PingZhenWPP2 At HouChiWeir,1297,421,70,19,8,3,0,0,0,0,0,0
+10,67,Ratio BanXinWPP At HouChiWeir,1308,477,70,19,8,3,0,0,0,0,0,0
+10,68,Ratio DaNanWPP1 At HouChiWeir,1292,539,64,19,8,3,0,0,0,0,0,0
+10,69,Ratio DaNanWPP2 At HouChiWeir,1298,595,64,19,8,3,0,0,0,0,0,0
+1,70,15,66,0,0,0,0,0,64,0,-1--1--1,,1|(1149,422)|
+1,71,10,67,0,0,0,0,0,64,0,-1--1--1,,1|(1154,477)|
+1,72,11,68,0,0,0,0,0,64,0,-1--1--1,,1|(1151,537)|
+1,73,12,69,0,0,0,0,0,64,0,-1--1--1,,1|(1158,593)|
+1,74,65,69,1,0,0,0,0,64,0,-1--1--1,,1|(1384,626)|
+1,75,65,68,1,0,0,0,0,64,0,-1--1--1,,1|(1414,606)|
+1,76,65,67,1,0,0,0,0,64,0,-1--1--1,,1|(1448,541)|
+1,77,65,66,1,0,0,0,0,64,0,-1--1--1,,1|(1479,523)|
+1,78,15,65,0,0,0,0,0,64,0,-1--1--1,,1|(1154,542)|
+1,79,10,65,0,0,0,0,0,64,0,-1--1--1,,1|(1151,570)|
+1,80,11,65,0,0,0,0,0,64,0,-1--1--1,,1|(1150,603)|
+1,81,12,65,0,0,0,0,0,64,0,-1--1--1,,1|(1136,630)|
+10,82,Total WPP Allocation At YuanShanWeir,985,776,118,45,3,131,0,1,0,0,0,0,0-128-255,0-0-0,|12||0-0-0
+1,83,10,82,1,0,0,0,0,64,0,-1--1--1,,1|(924,597)|
+1,84,11,82,1,0,0,0,0,64,0,-1--1--1,,1|(942,640)|
+10,85,Ratio BanXinWPP Allocation At YuanShanWeir,759,655,60,28,8,3,0,0,0,0,0,0
+10,86,Ratio DaNanWPP1 Allocation At YuanShanWei,756,724,64,28,8,3,0,0,0,0,0,0
+1,87,82,85,0,0,0,0,0,64,0,-1--1--1,,1|(862,710)|
+1,88,82,86,0,0,0,0,0,64,0,-1--1--1,,1|(850,745)|
+1,89,10,85,0,0,0,0,0,64,0,-1--1--1,,1|(905,558)|
+1,90,11,86,0,0,0,0,0,64,0,-1--1--1,,1|(902,625)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Transfer Ratio
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,80,0
+10,1,Sum WPP ShiMenReservoir To HouChiWeir,371,141,67,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,2,Sum AgriWater ShiMenReservoir To ShiMenAgriChannel,1044,239,69,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,3,Sum AgriWater ShiMenReservoir To HouChiWeir,355,230,67,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,4,Sum WPP HouChiWeir To ZhongZhuangWeir,451,725,64,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,5,Sum Allocation HouChiWeir To ZhongZhuangWeir,638,637,108,44,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,6,Sum AgriWater HouChiWeir To TaoYuanAgriChannel,993,675,74,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,7,Sum Allocation HouChiWeir To TaoYuanAgriChannel,1181,520,85,27,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,8,Ratio WPP ShiMenReservoir To HouChiWeir,630,140,67,28,8,3,0,0,0,0,0,0
+10,9,Ratio AgriWater ShiMenReservoir To HouChiWeir,632,226,67,28,8,3,0,0,0,0,0,0
+10,10,Ratio WPP ShiMenReservoir To ShiMenAgriChannel,1302,154,67,28,8,3,0,0,0,0,0,0
+10,11,Ratio AgriWater ShiMenReservoir To ShiMenAgriChannel,1289,249,67,28,8,3,0,0,0,0,0,0
+10,12,Ratio WPP HouChiWeir To TaoYuanAgriChannel,1176,592,80,19,8,3,0,0,0,0,0,0
+10,13,Ratio AgriWater HouChiWeir To TaoYuanAgriChannel,1183,670,69,28,8,3,0,0,0,0,0,0
+10,14,Ratio WPP HouChiWeir To ZhongZhuangWeir,645,731,79,19,8,3,0,0,0,0,0,0
+10,15,Ratio AgriWater HouChiWeir To ZhongZhuangWeir,644,833,59,28,8,3,0,0,0,0,0,0
+1,16,1,8,0,0,0,0,0,64,0,-1--1--1,,1|(493,140)|
+1,17,3,9,0,0,0,0,0,64,0,-1--1--1,,1|(486,228)|
+1,18,2,11,0,0,0,0,0,64,0,-1--1--1,,1|(1160,243)|
+1,19,7,12,1,0,0,0,0,64,0,-1--1--1,,1|(1263,561)|
+1,20,7,13,1,0,0,0,0,64,0,-1--1--1,,1|(1302,622)|
+1,21,4,14,0,0,0,0,0,64,0,-1--1--1,,1|(533,726)|
+1,22,5,15,1,0,0,0,0,64,0,-1--1--1,,1|(795,737)|
+10,23,Sum Allcation From ShiMenReservoir,839,46,64,19,8,131,0,0,0,0,0,0
+10,24,Ratio ShiMenReservoir To HouChiWeir,643,-46,74,19,8,3,0,0,0,0,0,0
+10,25,Ratio ShiMenReservoir To ShiMenAgriChannel,1167,-43,75,19,8,3,0,0,0,0,0,0
+10,26,Allocation NCSIST,1023,323,78,16,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||255-128-0
+10,27,Ratio NCSIST At ShiMenAgriChannel,1298,324,65,19,8,3,0,0,0,0,0,0
+1,28,26,27,0,0,0,0,0,64,0,-1--1--1,,1|(1160,323)|
+10,29,Allocation NCSIST,348,530,72,20,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||255-128-0
+10,30,Allocation TaoYuan CPC Refinery,361,465,69,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||255-128-0
+10,31,Ratio TaoYuan CPC Refinery At HouChiWeir,643,459,79,19,8,3,0,0,0,0,0,0
+10,32,Ratio NCSIST At HouChiWeir,638,524,58,19,8,3,0,0,0,0,0,0
+1,33,30,31,0,0,0,0,0,64,0,-1--1--1,,1|(490,462)|
+1,34,29,32,0,0,0,0,0,64,0,-1--1--1,,1|(493,527)|
+10,35,Allocation NCSIST,996,823,80,20,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||255-128-0
+10,36,Allocation TaoYuan CPC Refinery,992,756,69,19,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||255-128-0
+10,37,Ratio TaoYuan CPC Refinery At TaoYuanAgriChannel,1189,754,69,28,8,3,0,0,0,0,0,0
+10,38,Ratio NCSIST At TaoYuanAgriChannel,1184,828,69,19,8,3,0,0,0,0,0,0
+1,39,7,37,1,0,0,0,0,64,0,-1--1--1,,1|(1318,730)|
+1,40,7,38,1,0,0,0,0,64,0,-1--1--1,,1|(1397,733)|
+1,41,36,37,0,0,0,0,0,64,0,-1--1--1,,1|(1083,755)|
+1,42,35,38,0,0,0,0,0,64,0,-1--1--1,,1|(1088,825)|
+10,43,Ratio AgriWater ShiMenReservoir To HouChiWeir In TaoYuanAgriChannel,627,382,110,28,8,3,0,0,0,0,0,0
+10,44,Ratio AgriWater ShiMenReservoir To HouChiWeir In DaHanRiver,656,303,117,27,8,131,0,0,0,0,0,0
+1,45,6,13,0,0,0,0,0,64,0,-1--1--1,,1|(1083,672)|
+1,46,5,14,1,0,0,0,0,64,0,-1--1--1,,1|(749,700)|
+10,47,Sum WPP ShiMenReservoir To ShiMenAgriChannel,1024,158,69,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,48,47,10,0,0,0,0,0,64,0,-1--1--1,,1|(1157,156)|
+10,49,Allocation TaoYuanDaHanRiver AgriWater,351,304,88,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,50,Allocation TaoYuan AgriChannel AgriWater,355,374,86,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,51,50,43,0,0,0,0,0,64,0,-1--1--1,,1|(472,376)|
+1,52,49,44,1,0,0,0,0,64,0,-1--1--1,,1|(482,303)|
+10,53,Sum Allocation ShiMenReservoir To ShiMenAgriChannel,1134,64,67,28,8,3,0,0,0,0,0,0
+10,54,Sum Allocation ShiMenReservoir To HouChiWeir,492,57,67,28,8,3,0,0,0,0,0,0
+1,55,1,54,1,0,0,0,0,64,0,-1--1--1,,1|(470,106)|
+1,56,49,54,1,0,0,0,0,64,0,-1--1--1,,1|(485,194)|
+1,57,50,54,1,0,0,0,0,64,0,-1--1--1,,1|(507,224)|
+1,58,54,8,1,0,0,0,0,64,0,-1--1--1,,1|(515,108)|
+1,59,54,9,1,0,0,0,0,64,0,-1--1--1,,1|(517,153)|
+1,60,54,44,1,0,0,0,0,64,0,-1--1--1,,1|(516,204)|
+1,61,54,43,1,0,0,0,0,64,0,-1--1--1,,1|(505,247)|
+1,62,47,53,1,0,0,0,0,64,0,-1--1--1,,1|(1092,126)|
+1,63,2,53,1,0,0,0,0,64,0,-1--1--1,,1|(1103,166)|
+1,64,26,53,1,0,0,0,0,64,0,-1--1--1,,1|(1111,215)|
+1,65,53,10,1,0,0,0,0,64,0,-1--1--1,,1|(1184,128)|
+1,66,53,11,1,0,0,0,0,64,0,-1--1--1,,1|(1175,156)|
+1,67,53,27,1,0,0,0,0,64,0,-1--1--1,,1|(1175,207)|
+1,68,30,54,1,0,0,0,0,64,0,-1--1--1,,1|(506,295)|
+1,69,29,54,1,0,0,0,0,64,0,-1--1--1,,1|(514,327)|
+1,70,54,31,1,0,0,0,0,64,0,-1--1--1,,1|(487,278)|
+1,71,54,32,1,0,0,0,0,64,0,-1--1--1,,1|(474,307)|
+1,72,54,23,0,0,0,0,0,64,0,-1--1--1,,1|(660,51)|
+1,73,53,23,0,0,0,0,0,64,0,-1--1--1,,1|(991,54)|
+1,74,23,24,0,0,0,0,0,64,0,-1--1--1,,1|(747,2)|
+1,75,23,25,0,0,0,0,0,64,0,-1--1--1,,1|(992,4)|
+1,76,53,25,0,0,0,0,0,64,0,-1--1--1,,1|(1149,13)|
+1,77,54,24,0,0,0,0,0,64,0,-1--1--1,,1|(568,4)|
+10,78,Sum WPP HouChiWeir To TaoYuanAgriChannel,990,590,85,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,79,78,12,0,0,0,0,0,64,0,-1--1--1,,1|(1078,590)|
+10,80,Sum AgriWater HouChiWeir To ZhongZhuangWeir,458,835,64,28,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,81,80,15,0,0,0,0,0,64,0,-1--1--1,,1|(546,834)|
+///---\\\
+:L<%^E!@
+9:Current
+23:0
+15:0,0,0,0,0,0
+19:110,0
+27:0,
+34:0,
+4:Time
+5:Industry Water Demand
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:4
+41:0
+24:0
+25:11
+26:11
