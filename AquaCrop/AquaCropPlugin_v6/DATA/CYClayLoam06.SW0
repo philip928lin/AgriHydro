@@ -1,0 +1,14 @@
+0.6
+    6.1   : AquaCrop Version (May 2018)
+    6.00  : initial canopy cover (%) at start of simulation period
+    0.018 : biomass (ton/ha) produced before the start of the simulation period
+   -9.00  : initial effective rooting depth that can be reached without water stress will be used as default
+    0.0   : water layer (mm) stored between soil bunds (if present)
+    0.00  : electrical conductivity (dS/m) of water layer stored between soil bunds (if present)
+    0     : soil water content specified for specific layers
+    2     : number of layers considered
+
+Thickness layer (m)     Water content (vol%)     ECe(dS/m)
+==============================================================
+         0.40                22.00                  0.00
+         0.15                22.00                  0.00

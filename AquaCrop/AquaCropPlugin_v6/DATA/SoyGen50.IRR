@@ -1,0 +1,15 @@
+50% (40% is for whole 50% is for seed)
+   6.1   : AquaCrop Version (May 2018)
+   4     : Surface irrigation: Furrow
+  60     : Percentage of soil surface wetted by irrigation
+   2     : Generate irrigation schedule
+   3     : Time criterion = allowable fraction of RAW
+   1     : Depth criterion = back to FC
+
+  From day    Depleted RAW (%)   Back to FC (+/- mm)       ECw (dS/m)
+=========================================================================
+       1             50                   0                   0.0
+       15            60                   0                   0.0
+       40            10                   0                   0.0
+       56            60                   0                   0.0
+       90            80                 -20                   0.0
