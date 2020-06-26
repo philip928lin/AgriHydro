@@ -7,8 +7,8 @@ To run AgriHydro, please follow the steps below.
 	(2) AgriHydroCommonWthData	    => weather data folder
 	(3) AgriHydroCommonSDInflowData	=> stream flow data folder
 	(4) AgriHydroBlank		          => results and other files
-2. Prepare weather data using MultiWG and name the file as "<GCM>_<RCP>_<start year(EX 2021)>_<station ID>.csv". Put those weather files in AgriHydroCommonWthData folder.
-3. Prepare stream flow using GWLF and name the file as "<GCM>_<RCP>_<start year(EX 2021)>_<#Run (EX 1)>_<year in the Run (EX y11)>.csv". Put those stream flow files in AgriHydroCommonSDInflowData folder.
+2. Prepare weather data using MultiWG and name the file as <GCM>_<RCP>_<start year(EX 2021)>_<station ID>.csv. Put those weather files in AgriHydroCommonWthData folder.
+3. Prepare stream flow using GWLF and name the file as <GCM>_<RCP>_<start year(EX 2021)>_<#Run (EX 1)>_<year in the Run (EX y11)>.csv. Put those stream flow files in AgriHydroCommonSDInflowData folder.
 4. Exercute AgriHydro_RUN.py
   
 ## Multi-site Stochastic Weather Generator
@@ -39,9 +39,9 @@ For this components, user can either run GWLF.py directly from Python or downloa
 ## Taoyuan SD model
 Here we provide the converted Taoyuan SD model, which can be exercuted by PySD package.
 To load the model, the following code can be used.
-"""
+```
 SDmodel = pysd.load(filename)
-"""
+```
 More control options can be found at https://pysd-cookbook.readthedocs.io/en/latest/
 
 ## AquaCrop
