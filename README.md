@@ -7,9 +7,9 @@ To run AgriHydro, please follow the steps below.
 	(2) AgriHydroCommonWthData	    => weather data folder
 	(3) AgriHydroCommonSDInflowData	=> stream flow data folder
 	(4) AgriHydroBlank		          => results and other files
-2. Prepare weather data using MultiWG and name the file as [GCM]_ [Rcp]_ [start year(EX 2021)]_[station ID].csv. Put those weather files in AgriHydroCommonWthData folder.
+2. Prepare weather data using MultiWG and name the file as [GCM]_ [Rcp]_ [start year(EX 2021)]_ [station ID].csv. Put those weather files in AgriHydroCommonWthData folder.
 3. Prepare stream flow using GWLF and name the file as [GCM]_ [Rcp]_ [start year(EX 2021)]_ [Run (EX 1)]_ [year in the Run (EX y11)].csv. Put those stream flow files in AgriHydroCommonSDInflowData folder.
-4. Exercute AgriHydro_RUN.py
+4. Exercute the function, BatchRun, in AgriHydro_A_Batch.py to run AgriHydro
   
 ## Multi-site Stochastic Weather Generator
 
