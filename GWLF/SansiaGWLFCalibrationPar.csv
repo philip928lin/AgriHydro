@@ -1,0 +1,4 @@
+# Description,,,,,,
+Available water capacity (cm),Reccession coef,Land cover coef,cm,cm,Curve number,(ha)
+AWC,r,Kc,ini_SWC_sat,ini_SWC_unsat,CN,Area
+10,0.108,0.95,3,6,76,12534
