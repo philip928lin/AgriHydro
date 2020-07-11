@@ -13,7 +13,7 @@ To run AgriHydro, please follow the steps below.
   
 ## Multi-site Stochastic Weather Generator
 
-The instruction, sample data, and the program can be downloaded at https://drive.google.com/drive/folders/1YCsQCfLnDI2d7cy8DR51DyG--BJSmEf0?usp=sharing
+The instruction, sample data, and the program can be downloaded at https://drive.google.com/drive/folders/1YCsQCfLnDI2d7cy8DR51DyG--BJSmEf0?usp=sharing.
 
 Currently, we only provide exe file for users. The source code could be provided in the future or by request. Further infomation please contact the author. 
 
@@ -42,6 +42,7 @@ To load the model, the following code can be used.
 ```
 SDmodel = pysd.load(filename)
 ```
-More control options can be found at https://pysd-cookbook.readthedocs.io/en/latest/
+More control options can be found at https://pysd-cookbook.readthedocs.io/en/latest/.
 
 ## AquaCrop
+The input files for our study crops, such as Rice and Soybean, are provided. For more detail about AquaCrop, please find it at http://www.fao.org/aquacrop.
